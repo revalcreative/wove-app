@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wove - Shop Consciously, Live Comfortably</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+            background: white;
+        }
+
+        .logo {
+            font-size: 32px;
+            color: #4a6d4a;
+            cursor: pointer;
+        }
+
+        .logo img {
+            display: block;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        nav {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        nav a:hover {
+            color: #4a6d4a;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: #f9f9f9;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+
+        /* Grade Cards */
+        .grade-cards {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .grade-card {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+            align-items: center;
+        }
+
+        .grade-badge {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .grade-a { background: #4a6d4a; }
+        .grade-b { background: #6b8e6b; }
+        .grade-d { background: #d9844a; }
+        .grade-f { background: #a34343; }
+
+        .grade-info h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .grade-info p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Analysis Section */
+        .analysis-section {
+            background: #4a6d4a;
+            color: white;
+            padding: 80px 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .analysis-content h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .analysis-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .analysis-content li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .analysis-content li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+        }
+
+        .analysis-content p {
+            margin-top: 30px;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .analysis-image {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 20px;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .how-it-works h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+
+        .how-it-works > p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 60px;
+        }
+
+        .steps {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        .step h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .step p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Story Section */
+        .story-section {
+            padding: 80px 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .story-image {
+            background: #f5f5f5;
+            min-height: 400px;
+            border-radius: 8px;
+        }
+
+        .story-content h2 {
+            font-size: 36px;
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+
+        .story-content p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        /* Movement Section */
+        .movement-section {
+            background: #4a6d4a;
+            color: white;
+            padding: 80px 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .movement-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .movement-content h3 {
+            font-size: 22px;
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+
+        .movement-content p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .movement-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .movement-content li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .movement-content li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: #4a6d4a;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .cta-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            gap: 15px;
+        }
+
+        .cta-form input {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .cta-form button {
+            padding: 12px 30px;
+            background: white;
+            color: #4a6d4a;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-form button:hover {
+            background: #f5f5f5;
+        }
+
+        /* Footer */
+        footer {
+            background: #4a6d4a;
+            color: white;
+            padding: 40px 60px 20px;
+            font-size: 12px;
+        }
+
+        .footer-content {
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        .footer-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 20px 30px;
+            }
+
+            nav {
+                gap: 20px;
+            }
+
+            .analysis-section,
+            .story-section,
+            .movement-section {
+                grid-template-columns: 1fr;
+                padding: 60px 30px;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo" onclick="showPage('home')">
+            <img src="images/wove-logo.png" alt="wove" style="height: 40px;">
+        </div>
+        <nav>
+            <a onclick="showPage('story')">THE STORY</a>
+            <a onclick="showPage('score')">WOVE SCORE</a>
+            <a onclick="showPage('extension')">GET THE EXTENSION</a>
+        </nav>
+    </header>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <section style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; padding: 80px 60px; align-items: center; max-width: 1400px; margin: 0 auto;">
+            <div style="background: #f5f3ed; padding: 40px; border-radius: 12px;">
+                <div style="margin-bottom: 10px;">
+                    <img src="images/wove-logo.png" alt="wove" style="height: 35px;">
+                </div>
+                <p style="font-size: 14px; color: #666; margin-bottom: 30px;">Shop consciously. Live comfortably.</p>
+                <button style="width: 100%; padding: 14px; background: #f5f3ed; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 30px; cursor: pointer; font-size: 14px;">Scan This Product</button>
+                
+                <div style="background: white; padding: 30px; border-radius: 12px; margin-bottom: 20px;">
+                    <div style="font-size: 48px; font-weight: 300; color: #4a6d4a; margin-bottom: 5px;">20 (F)</div>
+                    <div style="font-size: 12px; color: #999; margin-bottom: 25px;">Wove Score</div>
+                    
+                    <div style="margin-bottom: 15px; display: flex; justify-content: space-between; padding-bottom: 10px; border-bottom: 1px solid #f0f0f0;">
+                        <span style="font-size: 13px; color: #666;">Natural Fibers:</span>
+                        <span style="font-size: 13px; color: #333; font-weight: 500;">0%</span>
+                    </div>
+                    <div style="margin-bottom: 15px; display: flex; justify-content: space-between; padding-bottom: 10px; border-bottom: 1px solid #f0f0f0;">
+                        <span style="font-size: 13px; color: #666;">Synthetic+Semi:</span>
+                        <span style="font-size: 13px; color: #333; font-weight: 500;">100.0%</span>
+                    </div>
+                    <div style="margin-bottom: 15px; display: flex; justify-content: space-between; padding-bottom: 10px; border-bottom: 1px solid #f0f0f0;">
+                        <span style="font-size: 13px; color: #666;">Microplastic Risk:</span>
+                        <span style="font-size: 13px; color: #333; font-weight: 500;">High</span>
+                    </div>
+                    <div style="margin-bottom: 20px; display: flex; justify-content: space-between; padding-bottom: 10px;">
+                        <span style="font-size: 13px; color: #666;">PFAS Concern:</span>
+                        <span style="font-size: 13px; color: #333; font-weight: 500;">No</span>
+                    </div>
+                    
+                    <div style="background: #fff8e8; padding: 12px; border-radius: 6px; margin-bottom: 15px;">
+                        <div style="color: #d4a62a; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px;">⚠ LOW SUSTAINABILITY SCORE</div>
+                        <p style="font-size: 12px; color: #666; line-height: 1.5;">This product scored below our sustainability threshold. Let's find you better alternatives!</p>
+                    </div>
+                    
+                    <button style="width: 100%; padding: 12px; background: #4a6d4a; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500;">🔍 Find Better Alternatives</button>
+                </div>
+            </div>
+            
+            <div>
+                <div style="margin-bottom: 20px;">
+                    <img src="images/wove-logo-large.png" alt="wove" style="height: 80px;">
+                </div>
+                <h2 style="font-size: 36px; margin-bottom: 20px; font-weight: 400; line-height: 1.3;">Shop consciously.<br>Live comfortably.</h2>
+                <p style="color: #666; margin-bottom: 15px; line-height: 1.7;">Wove helps you understand what your clothes are really made of — instantly.</p>
+                <p style="color: #666; margin-bottom: 30px; line-height: 1.7;">Scan any product online to reveal its fabric composition, sustainability score, and microplastic impact.</p>
+                
+                <p style="font-weight: 600; margin-bottom: 20px;">First 100 get 70% off for life.</p>
+                
+                <form class="cta-form" style="margin-top: 20px;" action="mailto:hello@woveapp.com" method="post" enctype="text/plain">
+                    <input type="email" name="email" placeholder="E-Mail" required style="flex: 1; padding: 14px 20px; border: 1px solid #ddd; border-radius: 25px; font-size: 14px;">
+                    <button type="submit" style="padding: 14px 35px; background: #4a6d4a; color: white; border: none; border-radius: 25px; font-weight: 600; cursor: pointer; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px; white-space: nowrap;">GET EARLY ACCESS</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="analysis-section">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2 style="font-size: 36px; margin-bottom: 15px; font-weight: 400;">See the Truth Behind Every Fabric</h2>
+                <p style="font-size: 18px; opacity: 0.9;">Transparent insights for conscious shopping</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1200px; margin: 0 auto;">
+                <div class="analysis-image" style="background: rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; min-height: 400px;">[Extension Screenshot]</div>
+                
+                <div style="display: flex; flex-direction: column; gap: 35px;">
+                    <div>
+                        <h3 style="font-size: 20px; margin-bottom: 12px; font-weight: 600;">Instant Transparency</h3>
+                        <p style="opacity: 0.9; line-height: 1.7;">Scan any product while shopping online to instantly reveal fabric composition, sustainability scores, and chemical concerns.</p>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 20px; margin-bottom: 12px; font-weight: 600;">Clear A+ to F Grading</h3>
+                        <p style="opacity: 0.9; line-height: 1.7;">Every item gets a simple grade based on natural fiber percentage, microplastic risk, PFAS concerns, and overall sustainability.</p>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 20px; margin-bottom: 12px; font-weight: 600;">Better Alternatives</h3>
+                        <p style="opacity: 0.9; line-height: 1.7;">If a product doesn't meet our standards, we'll recommend an alternative that better suits your needs. No greenwashing. Just transparency.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="how-it-works">
+            <h2>How it Works</h2>
+            <p>Three easy steps to shopping consciously</p>
+            <div style="max-width: 1200px; margin: 60px auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 80px; align-items: start;">
+                <div style="text-align: center;">
+                    <div style="width: 100px; height: 100px; margin: 0 auto 30px; background: #4a6d4a; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 48px; color: white;">⬇</div>
+                    <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 15px;">Download the Extension</h3>
+                    <p style="color: #666; font-size: 14px; line-height: 1.6;">Sign up to get the link to the extension.</p>
+                    <div style="margin-top: 30px; background: #f5f5f5; padding: 20px; border-radius: 8px; min-height: 200px;">[Extension Preview Image]</div>
+                </div>
+                
+                <div style="text-align: center;">
+                    <div style="width: 100px; height: 100px; margin: 0 auto 30px; background: #4a6d4a; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 48px; color: white;">🛒</div>
+                    <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 15px;">Shop Anywhere</h3>
+                    <p style="color: #666; font-size: 14px; line-height: 1.6;">Browse your favorite stores like Amazon, Zara, or Reformation as usual.</p>
+                    <div style="margin-top: 30px; background: #f5f5f5; padding: 20px; border-radius: 8px; min-height: 200px;">[Shopping Screenshot]</div>
+                </div>
+                
+                <div style="text-align: center;">
+                    <div style="width: 100px; height: 100px; margin: 0 auto 30px; background: #4a6d4a; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 56px; font-family: Georgia, serif; font-style: italic; color: white;">w</div>
+                    <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 15px;">See the Score</h3>
+                    <p style="color: #666; font-size: 14px; line-height: 1.6;">Instantly view the Wove Score, fabric breakdown, and health impacts.</p>
+                    <div style="margin-top: 30px; background: #f5f5f5; padding: 20px; border-radius: 8px; min-height: 200px;">[Score Display Image]</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>First 100 get 70% off for life.</h2>
+            <form class="cta-form" action="mailto:hello@woveapp.com" method="post" enctype="text/plain">
+                <input type="email" name="email" placeholder="E-Mail" required>
+                <button type="submit">GET EARLY ACCESS</button>
+            </form>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <p>© 2025 Wove. Shop consciously. Live comfortably.</p>
+                <div class="footer-links">
+                    <a href="#" onclick="showPage('story')">About</a>
+                    <a href="#" onclick="showPage('score')">How Scoring Works</a>
+                    <a href="#" onclick="showPage('privacy')">Privacy Policy</a>
+                    <a href="#" onclick="showPage('contact')">Contact</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Score Page -->
+    <div id="score" class="page">
+        <section class="hero">
+            <h1>Understanding the Wove Score</h1>
+            <p>Every product you scan receives a letter grade from A+ to F. Our proprietary algorithm analyzes multiple factors to give you an instant, easy-to-understand sustainability rating.</p>
+        </section>
+
+        <section class="grade-cards">
+            <div class="grade-card">
+                <div class="grade-badge grade-a">A+/A</div>
+                <div class="grade-info">
+                    <h3>Excellent</h3>
+                    <p>Natural fibers, certified sustainable, minimal chemical treatment. Safe for sensitive skin and the environment.</p>
+                </div>
+            </div>
+
+            <div class="grade-card">
+                <div class="grade-badge grade-b">B/C</div>
+                <div class="grade-info">
+                    <h3>Good to Moderate</h3>
+                    <p>Mixed natural and synthetic fibers with some chemical treatments. Acceptable for most uses but not ideal for sensitive skin.</p>
+                </div>
+            </div>
+
+            <div class="grade-card">
+                <div class="grade-badge grade-d">D</div>
+                <div class="grade-info">
+                    <h3>Poor</h3>
+                    <p>High synthetic content with chemical treatments. Reduced breathability and increased microplastic concerns.</p>
+                </div>
+            </div>
+
+            <div class="grade-card">
+                <div class="grade-badge grade-f">F</div>
+                <div class="grade-info">
+                    <h3>Avoid</h3>
+                    <p>Primarily synthetic fabrics. Non-breathable, high microplastic shedding, and significant environmental impact.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="analysis-section">
+            <div class="analysis-content">
+                <h2>What we Analyze</h2>
+                <ul>
+                    <li>Percentage of natural vs. synthetic fibers</li>
+                    <li>Third-party certifications (GOTS, OEKO-TEX, RWS, GRS)</li>
+                    <li>Chemical treatments and finishes</li>
+                    <li>Microplastic shedding risk</li>
+                    <li>PFAS and harmful chemical concerns</li>
+                    <li>Breathability and skin safety</li>
+                    <li>Overall environmental sustainability</li>
+                </ul>
+                <p>Our detailed scoring methodology is proprietary. Each factor is weighted based on extensive research and industry standards to provide you with the most accurate sustainability assessment.</p>
+            </div>
+            <div class="analysis-image">
+                [Product Score Display]
+            </div>
+        </section>
+
+        <section class="how-it-works">
+            <h2>How it Works</h2>
+            <p>Three easy steps to shopping consciously</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">⬇</div>
+                    <h3>Step 1: Download the Extension</h3>
+                    <p>Sign up to get the link to the extension.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">🛒</div>
+                    <h3>Step 2: Shop Anywhere</h3>
+                    <p>Browse your favorite stores like Amazon, Zara, or Reformation as usual.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">w</div>
+                    <h3>Step 3: See the Score</h3>
+                    <p>Instantly view the Wove Score, fabric breakdown, and health impacts.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>First 100 get 70% off for life.</h2>
+            <form class="cta-form">
+                <input type="email" placeholder="Email" required>
+                <button type="submit">GET EARLY ACCESS</button>
+            </form>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <p>© 2025 Wove. Shop consciously. Live comfortably.</p>
+                <div class="footer-links">
+                    <a href="#">About</a>
+                    <a href="#">How Scoring Works</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Story Page -->
+    <div id="story" class="page">
+        <section class="story-section">
+            <div class="story-image">[Founder Image]</div>
+            <div class="story-content">
+                <h2>This idea was born out of frustration.</h2>
+                <p>After spending hours searching for "cotton trousers" and finding nothing but polyester, I realized how little transparency exists in fashion. It became even more personal when I started learning about how synthetic fabrics and microplastics can affect our hormones and overall health.</p>
+                <p>What started as my personal quest to find clothing that aligned with both my health and my style quickly turned into something bigger — a tool to make it easier for everyone to shop consciously.</p>
+            </div>
+        </section>
+
+        <section class="story-section" style="background: #f9f9f9;">
+            <div class="story-content">
+                <p>We believe the things closest to our bodies shouldn't be filled with hidden toxins or microplastics. Yet, most of what's sold today is.</p>
+                <p>That's why we're building technology that exposes what's really in your clothes — so you can make confident, healthy choices without spending hours digging through product details or greenwashed marketing claims.</p>
+                <p style="font-weight: 600;">Fashion and health don't have to exist in separate worlds.</p>
+                <p>You deserve both.</p>
+            </div>
+            <div class="story-image">[Clothing Stack Image]</div>
+        </section>
+
+        <section class="movement-section">
+            <div class="movement-content">
+                <h2>The Wove Movement</h2>
+                <h3>This isn't just an app — it's a shift in mindset.</h3>
+                <p>A movement toward awareness, honesty, and harmony between what we wear and how we live. We're re-imagining the future of fashion as one where:</p>
+                <ul>
+                    <li>Transparency is standard</li>
+                    <li>Natural materials are accessible</li>
+                    <li>Every purchase supports your well-being</li>
+                </ul>
+                <p>And it starts with something as simple as knowing what touches your skin.</p>
+                <form class="cta-form" style="margin-top: 30px;">
+                    <input type="email" placeholder="Email" required>
+                    <button type="submit">GET EARLY ACCESS</button>
+                </form>
+            </div>
+            <div class="analysis-image">[Extension Preview]</div>
+        </section>
+
+        <section class="how-it-works">
+            <h2>How it Works</h2>
+            <p>Three easy steps to shopping consciously</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">⬇</div>
+                    <h3>Step 1: Download the Extension</h3>
+                    <p>Sign up to get the link to the extension.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">🛒</div>
+                    <h3>Step 2: Shop Anywhere</h3>
+                    <p>Browse your favorite stores like Amazon, Zara, or Reformation as usual.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">w</div>
+                    <h3>Step 3: See the Score</h3>
+                    <p>Instantly view the Wove Score, fabric breakdown, and health impacts.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>First 100 get 70% off for life.</h2>
+            <form class="cta-form">
+                <input type="email" placeholder="Email" required>
+                <button type="submit">GET EARLY ACCESS</button>
+            </form>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <p>© 2025 Wove. Shop consciously. Live comfortably.</p>
+                <div class="footer-links">
+                    <a href="#">About</a>
+                    <a href="#">How Scoring Works</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Extension Page -->
+    <div id="extension" class="page">
+        <section class="hero">
+            <h2 style="font-size: 48px; font-weight: 400; margin-bottom: 30px;">Shop Consciously.<br>Live Comfortably.</h2>
+            <p>Wove helps you understand what your clothes are really made of — instantly.</p>
+            <p>Scan any product online to reveal its fabric composition, sustainability score, and microplastic impact.</p>
+        </section>
+
+        <section class="analysis-section">
+            <div class="analysis-content">
+                <h2>See the Truth Behind Every Fabric</h2>
+                <h3 style="font-size: 20px; margin-bottom: 20px; font-weight: 400;">Transparent insights for conscious shopping</h3>
+                <div style="margin-bottom: 30px;">
+                    <h4 style="margin-bottom: 10px;">Instant Transparency</h4>
+                    <p style="opacity: 0.9;">Scan any product while shopping online to instantly reveal fabric composition, sustainability scores, and chemical concerns.</p>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 10px;">Better Alternatives</h4>
+                    <p style="opacity: 0.9;">If a product doesn't meet our standards, we'll recommend an alternative that better suits your needs. No greenwashing. Just transparency.</p>
+                </div>
+            </div>
+            <div class="analysis-image">[Extension Screenshot]</div>
+        </section>
+
+        <section class="how-it-works">
+            <h2>How it Works</h2>
+            <p>Three easy steps to shopping consciously</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">⬇</div>
+                    <h3>Step 1: Download the Extension</h3>
+                    <p>Sign up to get the link to the extension.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">🛒</div>
+                    <h3>Step 2: Shop Anywhere</h3>
+                    <p>Browse your favorite stores like Amazon, Zara, or Reformation as usual.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">w</div>
+                    <h3>Step 3: See the Score</h3>
+                    <p>Instantly view the Wove Score, fabric breakdown, and health impacts.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>First 100 get 70% off for life.</h2>
+            <form class="cta-form">
+                <input type="email" placeholder="Email" required>
+                <button type="submit">GET EARLY ACCESS</button>
+            </form>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <p>© 2025 Wove. Shop consciously. Live comfortably.</p>
+                <div class="footer-links">
+                    <a href="#">About</a>
+                    <a href="#">How Scoring Works</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page">
+        <section class="hero">
+            <h1>Contact Us</h1>
+            <p>Have questions? We'd love to hear from you.</p>
+        </section>
+
+        <section style="max-width: 600px; margin: 80px auto; padding: 0 20px;">
+            <form style="display: flex; flex-direction: column; gap: 20px;" action="mailto:hello@woveapp.com" method="post" enctype="text/plain">
+                <div>
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600;">Name</label>
+                    <input type="text" name="name" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600;">Email</label>
+                    <input type="email" name="email" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600;">Subject</label>
+                    <input type="text" name="subject" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600;">Message</label>
+                    <textarea name="message" required rows="6" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; font-family: inherit;"></textarea>
+                </div>
+                <button type="submit" style="padding: 14px 40px; background: #4a6d4a; color: white; border: none; border-radius: 4px; font-weight: 600; cursor: pointer; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">Send Message</button>
+            </form>
+
+            <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid #ddd;">
+                <h3 style="margin-bottom: 20px;">Other Ways to Reach Us</h3>
+                <p style="color: #666; margin-bottom: 10px;">Email: <a href="mailto:hello@woveapp.com" style="color: #4a6d4a;">hello@woveapp.com</a></p>
+                <p style="color: #666; margin-bottom: 10px;">Response time: Within 24-48 hours</p>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <p>© 2025 Wove. Shop consciously. Live comfortably.</p>
+                <div class="footer-links">
+                    <a href="#" onclick="showPage('story')">About</a>
+                    <a href="#" onclick="showPage('score')">How Scoring Works</a>
+                    <a href="#" onclick="showPage('privacy')">Privacy Policy</a>
+                    <a href="#" onclick="showPage('contact')">Contact</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Privacy Policy Page -->
+    <div id="privacy" class="page">
+        <section class="hero">
+            <h1>Privacy Policy</h1>
+            <p>Last updated: January 2025</p>
+        </section>
+
+        <section style="max-width: 800px; margin: 60px auto; padding: 0 20px; line-height: 1.8;">
+            <h2 style="margin-bottom: 20px; color: #4a6d4a;">Introduction</h2>
+            <p style="margin-bottom: 30px; color: #666;">At Wove, we take your privacy seriously. This Privacy Policy explains how we collect, use, and protect your information when you use our browser extension and services.</p>
+
+            <h2 style="margin-bottom: 20px; color: #4a6d4a;">Information We Collect</h2>
+            <p style="margin-bottom: 15px; color: #666;">We collect the following types of information:</p>
+            <ul style="margin-bottom: 30px; padding-left: 20px; color: #666;">
+                <li style="margin-bottom: 10px;"><strong>Account Information:</strong> Email address and account preferences</li>
+                <li style="margin-bottom: 10px;"><strong>Usage Data:</strong> Products you scan, browsing patterns on supported retail sites</li>
+                <li style="margin-bottom: 10px;"><strong>Technical Information:</strong> Browser type, device information, and extension version</li>
+            </ul>
+
+            <h2 style="margin-bottom: 20px; color: #4a6d4a;">How We Use Your Information</h2>
+            <p style="margin-bottom: 15px; color: #666;">We use your information to:</p>
+            <ul style="margin-bottom: 30px; padding-left: 20px; color: #666;">
+                <li style="margin-bottom: 10px;">Provide fabric composition analysis and sustainability scores</li>
+                <li style="margin-bottom: 10px;">Improve our algorithm and scoring accuracy</li>
+                <li style="margin-bottom: 10px;">Send you product updates and notifications</li>
+                <li style="margin-bottom: 10px;">Personalize your shopping experience</li>
+            </ul>
+
+            <h2 style="margin-bottom: 20px; color: #4a6d4a;">Data Sharing</h2>
+            <p style="margin-bottom: 30px; color: #666;">We do not sell your personal information. We may share data with third-party service providers who help us operate our services, but only to the extent necessary and under strict confidentiality agreements.</p>
+
+            <h2 style="margin-bottom: 20px; color: #4a6d4a;">Your Rights</h2>
+            <p style="margin-bottom: 15px; color: #666;">You have the right to:</p>
+            <ul style="margin-bottom: 30px; padding-left: 20px; color: #666;">
+                <li style="margin-bottom: 10px;">Access your personal data</li>
+                <li style="margin-bottom: 10px;">Request deletion of your account and data</li>
+                <li style="margin-bottom: 10px;">Opt out of marketing communications</li>
+                <li style="margin-bottom: 10px;">Update your account information</li>
+            </ul>
+
+            <h2 style="margin-bottom: 20px; color: #4a6d4a;">Security</h2>
+            <p style="margin-bottom: 30px; color: #666;">We implement industry-standard security measures to protect your information. However, no method of transmission over the internet is 100% secure.</p>
+
+            <h2 style="margin-bottom: 20px; color: #4a6d4a;">Cookies and Tracking</h2>
+            <p style="margin-bottom: 30px; color: #666;">Our extension uses cookies and similar technologies to function properly and improve user experience. You can control cookie settings through your browser.</p>
+
+            <h2 style="margin-bottom: 20px; color: #4a6d4a;">Changes to This Policy</h2>
+            <p style="margin-bottom: 30px; color: #666;">We may update this Privacy Policy from time to time. We will notify you of any significant changes via email or through the extension.</p>
+
+            <h2 style="margin-bottom: 20px; color: #4a6d4a;">Contact Us</h2>
+            <p style="margin-bottom: 30px; color: #666;">If you have questions about this Privacy Policy, please contact us at privacy@wove.app or visit our <a href="#" onclick="showPage('contact')" style="color: #4a6d4a; text-decoration: underline;">contact page</a>.</p>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <p>© 2025 Wove. Shop consciously. Live comfortably.</p>
+                <div class="footer-links">
+                    <a href="#" onclick="showPage('story')">About</a>
+                    <a href="#" onclick="showPage('score')">How Scoring Works</a>
+                    <a href="#" onclick="showPage('privacy')">Privacy Policy</a>
+                    <a href="#" onclick="showPage('contact')">Contact</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const page = document.getElementById(pageId);
+            if (page) {
+                page.classList.add('active');
+                window.scrollTo(0, 0);
+            }
+        }
+    </script>
+</body>
+</html>
