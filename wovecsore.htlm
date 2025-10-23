@@ -1,12 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wove - Shop Consciously, Live Comfortably</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Wove Score - How Scoring Works</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -20,15 +17,7 @@
             line-height: 1.6;
             color: #333;
         }
-
-        .page {
-            display: none;
-        }
-
-        .page.active {
-            display: block;
-        }
-
+        
         /* Header */
         header {
             display: flex;
@@ -36,13 +25,11 @@
             align-items: center;
             padding: 20px 60px;
             background: white;
+            position: relative;
         }
 
-        .logo {
-            font-family: 'Georgia', serif;
-            font-size: 32px;
-            font-style: italic;
-            color: #4a6d4a;
+        .logo img {
+            height: 40px;
             cursor: pointer;
         }
 
@@ -57,7 +44,6 @@
             color: #333;
             font-size: 14px;
             font-weight: 500;
-            cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -66,6 +52,65 @@
             color: #4a6d4a;
         }
 
+        /* Mobile Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: #4a6d4a;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(7px, 7px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
+                background-color: white;
+                flex-direction: column;
+                padding: 80px 30px;
+                box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+                transition: right 0.3s ease;
+                z-index: 999;
+                gap: 30px;
+                align-items: flex-start;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            header {
+                padding: 20px 30px;
+            }
+        }
+        
         /* Hero Section */
         .hero {
             text-align: center;
@@ -77,13 +122,14 @@
             font-size: 42px;
             margin-bottom: 20px;
             font-weight: 400;
+            color: #333;
         }
 
         .hero p {
             font-size: 16px;
             color: #666;
             max-width: 700px;
-            margin: 0 auto 40px;
+            margin: 0 auto;
             line-height: 1.8;
         }
 
@@ -122,6 +168,8 @@
         .grade-info h3 {
             font-size: 18px;
             margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
         }
 
         .grade-info p {
@@ -156,6 +204,7 @@
             margin-bottom: 12px;
             padding-left: 20px;
             position: relative;
+            line-height: 1.6;
         }
 
         .analysis-content li:before {
@@ -173,11 +222,14 @@
         .analysis-image {
             background: rgba(255,255,255,0.1);
             border-radius: 8px;
-            padding: 20px;
+            padding: 40px 20px;
             min-height: 400px;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
+            text-align: center;
         }
 
         /* How It Works */
@@ -199,11 +251,11 @@
         }
 
         .steps {
-            max-width: 1200px;
-            margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 60px;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
         .step {
@@ -211,155 +263,28 @@
         }
 
         .step-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-            border-radius: 50%;
-            background: #f5f5f5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
+            font-size: 48px;
+            margin-bottom: 20px;
         }
 
         .step h3 {
-            font-size: 18px;
-            margin-bottom: 15px;
-            font-weight: 600;
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-weight: 500;
         }
 
         .step p {
             color: #666;
-            font-size: 14px;
             line-height: 1.6;
         }
-
-        /* Story Section */
-        .story-section {
-            padding: 80px 60px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .story-image {
-            background: #f5f5f5;
-            min-height: 400px;
-            border-radius: 8px;
-        }
-
-        .story-content h2 {
-            font-size: 36px;
-            margin-bottom: 25px;
-            font-weight: 400;
-        }
-
-        .story-content p {
-            color: #666;
-            margin-bottom: 20px;
-            line-height: 1.8;
-        }
-
-        /* Movement Section */
-        .movement-section {
-            background: #4a6d4a;
-            color: white;
-            padding: 80px 60px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .movement-content h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            font-weight: 400;
-        }
-
-        .movement-content h3 {
-            font-size: 22px;
-            margin-bottom: 25px;
-            font-weight: 400;
-        }
-
-        .movement-content p {
-            margin-bottom: 20px;
-            line-height: 1.8;
-            opacity: 0.9;
-        }
-
-        .movement-content ul {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0;
-        }
-
-        .movement-content li {
-            margin-bottom: 10px;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .movement-content li:before {
-            content: "•";
-            position: absolute;
-            left: 0;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: #4a6d4a;
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
-        }
-
-        .cta-section h2 {
-            font-size: 32px;
-            margin-bottom: 30px;
-            font-weight: 400;
-        }
-
-        .cta-form {
-            max-width: 500px;
-            margin: 0 auto;
-            display: flex;
-            gap: 15px;
-        }
-
-        .cta-form input {
-            flex: 1;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-
-        .cta-form button {
-            padding: 12px 30px;
-            background: white;
-            color: #4a6d4a;
-            border: none;
-            border-radius: 4px;
-            font-weight: 600;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-size: 12px;
-            letter-spacing: 0.5px;
-        }
-
-        .cta-form button:hover {
-            background: #f5f5f5;
-        }
-
+        
         /* Footer */
         footer {
             background: #4a6d4a;
             color: white;
             padding: 40px 60px 20px;
             font-size: 12px;
+            margin-top: 0;
         }
 
         .footer-content {
@@ -372,6 +297,7 @@
             display: flex;
             justify-content: center;
             gap: 20px;
+            flex-wrap: wrap;
         }
 
         .footer-links a {
@@ -384,142 +310,170 @@
             opacity: 1;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
-            header {
-                padding: 20px 30px;
+            .hero h1 {
+                font-size: 32px;
             }
 
-            nav {
-                gap: 20px;
+            .grade-card {
+                flex-direction: column;
+                text-align: center;
             }
 
-            .analysis-section,
-            .story-section,
-            .movement-section {
+            .analysis-section {
                 grid-template-columns: 1fr;
                 padding: 60px 30px;
             }
 
             .steps {
                 grid-template-columns: 1fr;
+                gap: 50px;
             }
 
-            .cta-form {
-                flex-direction: column;
+            .how-it-works {
+                padding: 60px 30px;
+            }
+
+            footer {
+                padding: 40px 30px 20px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
-        <div class="logo" onclick="showPage('home')">wove</div>
-        <nav>
- <a href="/about">THE STORY</a>
+        <div class="logo">
+            <a href="/"><img src="images/WoveLogo.png" alt="wove"></a>
+        </div>
+        <div class="hamburger" onclick="toggleMenu(this)">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav id="mainNav">
+            <a href="/about">THE STORY</a>
             <a href="/wovescore">WOVE SCORE</a>
-            //<a onclick="showPage('extension')">GET THE EXTENSION</a>
+            <!-- <a href="EXTERNAL_LINK_HERE" target="_blank">GET THE EXTENSION</a> -->
         </nav>
     </header>
 
-              <div id="score" class="page">
-        <section class="hero">
-            <h1>Understanding the Wove Score</h1>
-            <p>Every product you scan receives a letter grade from A+ to F. Our proprietary algorithm analyzes multiple factors to give you an instant, easy-to-understand sustainability rating.</p>
-        </section>
+    <section class="hero">
+        <h1>Understanding Your Wove Score</h1>
+        <p>Every product gets a simple A to F grade based on fabric composition, sustainability, and health impact.</p>
+    </section>
 
-        <section class="grade-cards">
-            <div class="grade-card">
-                <div class="grade-badge grade-a">A+/A</div>
-                <div class="grade-info">
-                    <h3>Excellent</h3>
-                    <p>Natural fibers, certified sustainable, minimal chemical treatment. Safe for sensitive skin and the environment.</p>
-                </div>
+    <div class="grade-cards">
+        <div class="grade-card">
+            <div class="grade-badge grade-a">A+</div>
+            <div class="grade-info">
+                <h3>95-100% natural fibers</h3>
+                <p>Excellent. Made entirely from natural, sustainable materials like organic cotton, linen, wool, or silk. No synthetics. Minimal to no chemical treatments.</p>
             </div>
+        </div>
 
-            <div class="grade-card">
-                <div class="grade-badge grade-b">B/C</div>
-                <div class="grade-info">
-                    <h3>Good to Moderate</h3>
-                    <p>Mixed natural and synthetic fibers with some chemical treatments. Acceptable for most uses but not ideal for sensitive skin.</p>
-                </div>
+        <div class="grade-card">
+            <div class="grade-badge grade-b">B</div>
+            <div class="grade-info">
+                <h3>70-94% natural fibers</h3>
+                <p>Good. Mostly natural materials with small amounts of synthetics (like spandex for stretch). Low microplastic risk and chemical concerns.</p>
             </div>
+        </div>
 
-            <div class="grade-card">
-                <div class="grade-badge grade-d">D</div>
-                <div class="grade-info">
-                    <h3>Poor</h3>
-                    <p>High synthetic content with chemical treatments. Reduced breathability and increased microplastic concerns.</p>
-                </div>
+        <div class="grade-card">
+            <div class="grade-badge grade-d">D</div>
+            <div class="grade-info">
+                <h3>30-69% natural fibers</h3>
+                <p>Fair. Mixed blend with moderate to high synthetic content. Moderate microplastic risk and potential chemical concerns.</p>
             </div>
+        </div>
 
-            <div class="grade-card">
-                <div class="grade-badge grade-f">F</div>
-                <div class="grade-info">
-                    <h3>Avoid</h3>
-                    <p>Primarily synthetic fabrics. Non-breathable, high microplastic shedding, and significant environmental impact.</p>
-                </div>
+        <div class="grade-card">
+            <div class="grade-badge grade-f">F</div>
+            <div class="grade-info">
+                <h3>Below 30% natural fibers</h3>
+                <p>Poor. Primarily synthetic materials like polyester, nylon, or acrylic. High microplastic risk and chemical concerns. Consider alternatives.</p>
             </div>
-        </section>
-
-        <section class="analysis-section">
-            <div class="analysis-content">
-                <h2>What we Analyze</h2>
-                <ul>
-                    <li>Percentage of natural vs. synthetic fibers</li>
-                    <li>Third-party certifications (GOTS, OEKO-TEX, RWS, GRS)</li>
-                    <li>Chemical treatments and finishes</li>
-                    <li>Microplastic shedding risk</li>
-                    <li>PFAS and harmful chemical concerns</li>
-                    <li>Breathability and skin safety</li>
-                    <li>Overall environmental sustainability</li>
-                </ul>
-                <p>Our detailed scoring methodology is proprietary. Each factor is weighted based on extensive research and industry standards to provide you with the most accurate sustainability assessment.</p>
-            </div>
-            <div class="analysis-image">
-                [Product Score Display]
-            </div>
-        </section>
-
-        <section class="how-it-works">
-            <h2>How it Works</h2>
-            <p>Three easy steps to shopping consciously</p>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-icon">⬇</div>
-                    <h3>Step 1: Download the Extension</h3>
-                    <p>Sign up to get the link to the extension.</p>
-                </div>
-                <div class="step">
-                    <div class="step-icon">🛒</div>
-                    <h3>Step 2: Shop Anywhere</h3>
-                    <p>Browse your favorite stores like Amazon, Zara, or Reformation as usual.</p>
-                </div>
-                <div class="step">
-                    <div class="step-icon">w</div>
-                    <h3>Step 3: See the Score</h3>
-                    <p>Instantly view the Wove Score, fabric breakdown, and health impacts.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="cta-section">
-            <h2>First 100 get 70% off for life.</h2>
-            <form class="cta-form">
-                <input type="email" placeholder="Email" required>
-                <button type="submit">GET EARLY ACCESS</button>
-            </form>
-        </section>
-
-        <footer>
-            <div class="footer-content">
-                <p>© 2025 Wove. Shop consciously. Live comfortably.</p>
-                <div class="footer-links">
-                    <a href="#">About</a>
-                    <a href="#">How Scoring Works</a>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Contact</a>
-                </div>
-            </div>
-        </footer>
+        </div>
     </div>
+
+    <section class="analysis-section">
+        <div class="analysis-content">
+            <h2>What We Analyze</h2>
+            <ul>
+                <li><strong>Natural Fiber %</strong> — Cotton, linen, wool, silk, hemp</li>
+                <li><strong>Synthetic Materials</strong> — Polyester, nylon, acrylic, rayon</li>
+                <li><strong>Microplastic Risk</strong> — Shedding potential during washing</li>
+                <li><strong>Chemical Treatments</strong> — PFAS, formaldehyde, flame retardants</li>
+                <li><strong>Sustainability</strong> — Production impact, biodegradability</li>
+            </ul>
+            <p>Our scoring algorithm is continuously updated based on the latest research about fabric safety, sustainability, and health impacts. We prioritize transparency over marketing claims.</p>
+        </div>
+        <div class="analysis-image">
+            [Score Breakdown Visual]<br><br>
+            Replace with: images/score-analysis.png
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <h2>Why Your Score Matters</h2>
+        <p>The clothes you wear every day impact your health and the environment</p>
+        <div class="steps">
+            <div class="step">
+                <div class="step-icon">🧬</div>
+                <h3>Your Health</h3>
+                <p>Synthetic fabrics can contain hormone-disrupting chemicals and shed microplastics that may be absorbed through your skin.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">🌊</div>
+                <h3>The Environment</h3>
+                <p>Washing synthetic clothing releases millions of microplastic particles into waterways, harming marine life and ecosystems.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">♻️</div>
+                <h3>Sustainability</h3>
+                <p>Natural fibers are biodegradable and renewable. Synthetics are petroleum-based and persist in landfills for hundreds of years.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 Wove. Shop consciously. Live comfortably.</p>
+            <div class="footer-links">
+                <a href="/about">About</a>
+                <a href="/wovescore">How Scoring Works</a>
+                <a href="/privacypolicy">Privacy Policy</a>
+                <a href="/contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMenu(hamburger) {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.getElementById('mainNav');
+            const hamburger = document.querySelector('.hamburger');
+            if (!nav.contains(event.target) && !hamburger.contains(event.target)) {
+                nav.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mainNav').classList.remove('active');
+                document.querySelector('.hamburger').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
+
