@@ -27,6 +27,7 @@
             align-items: center;
             padding: 20px 60px;
             background: white;
+            position: relative;
         }
 
         .logo img {
@@ -59,13 +60,27 @@
             flex-direction: column;
             cursor: pointer;
             gap: 5px;
+            z-index: 1001;
         }
 
         .hamburger span {
             width: 25px;
             height: 3px;
-            background-color: #333;
+            background-color: #4a6d4a;
             transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(7px, 7px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
         }
 
         @media (max-width: 768px) {
@@ -79,7 +94,7 @@
                 flex-direction: column;
                 padding: 80px 30px;
                 box-shadow: -2px 0 5px rgba(0,0,0,0.1);
-                transition: right 0.3s;
+                transition: right 0.3s ease;
                 z-index: 999;
                 gap: 30px;
                 align-items: flex-start;
@@ -91,7 +106,6 @@
 
             .hamburger {
                 display: flex;
-                z-index: 1000;
             }
 
             header {
@@ -110,76 +124,17 @@
             margin: 0 auto;
         }
 
-        .scan-button {
-            width: 100%;
-            padding: 14px;
-            background: #f5f3ed;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            cursor: pointer;
-            font-size: 14px;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .score-display {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-        }
-
-        .score-number {
-            font-size: 48px;
-            font-weight: 300;
-            color: #4a6d4a;
-            margin-bottom: 5px;
-        }
-
-        .score-label {
-            font-size: 12px;
-            color: #999;
-            margin-bottom: 25px;
-        }
-
-        .metric-row {
-            margin-bottom: 15px;
+        .score-card {
             display: flex;
-            justify-content: space-between;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #f0f0f0;
+            justify-content: center;
+            align-items: center;
         }
 
-        .metric-row:last-of-type {
-            margin-bottom: 20px;
-        }
-
-        .warning-box {
-            background: #fff8e8;
-            padding: 12px;
-            border-radius: 6px;
-            margin-bottom: 15px;
-        }
-
-        .warning-title {
-            color: #d4a62a;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 5px;
-        }
-
-        .find-alternatives-btn {
+        .score-card img {
+            max-width: 670px;
             width: 100%;
-            padding: 12px;
-            background: #4a6d4a;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 500;
-            font-family: 'Poppins', sans-serif;
+            height: auto;
+            display: block;
         }
 
         .hero-content h1 {
@@ -225,6 +180,11 @@
             letter-spacing: 0.5px;
             white-space: nowrap;
             font-family: 'Poppins', sans-serif;
+            transition: background 0.3s;
+        }
+
+        .cta-form button:hover {
+            background: #3d5a3d;
         }
 
         /* Analysis Section */
@@ -256,6 +216,34 @@
             margin: 0 auto;
         }
 
+        .image-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-placeholder img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .feature-list h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .feature-list p {
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
         /* How It Works */
         .how-it-works {
             padding: 80px 60px;
@@ -277,55 +265,44 @@
         }
 
         .steps-container {
-            max-width: 1400px;
-            margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .steps-left {
             display: flex;
             flex-direction: column;
-            gap: 60px;
+            gap: 40px;
         }
 
         .step {
-            text-align: center;
+            display: flex;
+            gap: 20px;
         }
 
         .step-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-            border: 3px solid #000;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
+            flex-shrink: 0;
         }
 
         .step-icon img {
-            width: 40px;
-            height: 40px;
+            width: 60px;
+            height: 60px;
             object-fit: contain;
         }
 
         .step h3 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 12px;
+            font-size: 20px;
+            margin-bottom: 8px;
             color: #333;
+            font-weight: 500;
         }
 
         .step p {
             color: #666;
-            font-size: 14px;
             line-height: 1.6;
-            max-width: 300px;
-            margin: 0 auto;
         }
 
         .steps-right {
@@ -378,6 +355,7 @@
             display: flex;
             justify-content: center;
             gap: 20px;
+            flex-wrap: wrap;
         }
 
         .footer-links a {
@@ -388,40 +366,6 @@
 
         .footer-links a:hover {
             opacity: 1;
-        }
-
-        /* Content Pages */
-        .content-page {
-            max-width: 800px;
-            margin: 80px auto;
-            padding: 0 20px;
-            line-height: 1.8;
-        }
-
-        .content-page h1 {
-            font-size: 42px;
-            margin-bottom: 30px;
-            color: #4a6d4a;
-        }
-
-        .content-page h2 {
-            margin: 40px 0 20px;
-            color: #4a6d4a;
-            font-size: 28px;
-        }
-
-        .content-page p {
-            margin-bottom: 20px;
-            color: #666;
-        }
-
-        .content-page ul {
-            margin: 20px 0 30px 40px;
-            color: #666;
-        }
-
-        .content-page li {
-            margin-bottom: 10px;
         }
 
         /* Success Message */
@@ -435,21 +379,48 @@
             display: none;
         }
 
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+
         @media (max-width: 768px) {
             .home-hero, .analysis-grid, .steps-container {
                 grid-template-columns: 1fr;
+                gap: 40px;
             }
             
-            header {
-                padding: 20px 30px;
+            .home-hero {
+                padding: 60px 30px;
             }
-            
-            nav {
-                gap: 20px;
+
+            .analysis-section {
+                padding: 60px 30px;
             }
 
             .how-it-works {
                 padding: 60px 30px;
+            }
+
+            .score-card img {
+                max-width: 100%;
+            }
+
+            .hero-content h2 {
+                font-size: 28px;
+            }
+
+            .cta-form {
+                flex-direction: column;
+            }
+
+            .cta-form button {
+                width: 100%;
             }
         }
     </style>
@@ -459,10 +430,15 @@
         <div class="logo">
             <a href="/"><img src="images/WoveLogo.png" alt="wove"></a>
         </div>
-        <nav>
-            <a href="/about.html">THE STORY</a>
-            <a href="wove-score.htlm">WOVE SCORE</a>
-      <a href="/extension.html">GET THE EXTENSION</a>
+        <div class="hamburger" onclick="toggleMenu(this)">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav id="mainNav">
+            <a href="/about">THE STORY</a>
+            <a href="/wovescore">WOVE SCORE</a>
+            <!-- <a href="EXTERNAL_LINK_HERE" target="_blank">GET THE EXTENSION</a> -->
         </nav>
     </header>
 
@@ -470,9 +446,8 @@
     <section class="home-hero">
         <div class="score-card">
             <img src="images/Wove-Sample.png" alt="WoveApp">
-            </div>
+        </div>
           
-        
         <div class="hero-content">
             <h1><img src="images/WoveLogo.png" alt="wove"></h1>
             <h2>Shop consciously.<br>Live comfortably.</h2>
@@ -481,11 +456,12 @@
             
             <p style="font-weight: 600; margin-bottom: 20px;">First 100 get 70% off for life.</p>
             
-            <form class="cta-form" id="homeEmailForm">
+            <form class="cta-form" id="homeEmailForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                 <input type="email" name="email" placeholder="E-Mail" required>
                 <button type="submit">GET EARLY ACCESS</button>
             </form>
             <div class="success-message" id="homeSuccess">Thanks for subscribing! Check your inbox soon.</div>
+            <div class="error-message" id="homeError">Oops! Something went wrong. Please try again.</div>
         </div>
     </section>
 
@@ -495,22 +471,21 @@
         
         <div class="analysis-grid">
             <div class="image-placeholder">
-            <img src="images/Howitworkgraphic.png" style="width: 100%; border-radius: 8px;">
-
+                <img src="images/Howitworkgraphic.png" alt="How it Works">
             </div>
             
             <div class="feature-list">
                 <div>
                     <h3>Instant Transparency</h3>
-                    <p style="opacity: 0.9; line-height: 1.7;">Scan any product while shopping online to instantly reveal fabric composition, sustainability scores, and chemical concerns.</p>
+                    <p>Scan any product while shopping online to instantly reveal fabric composition, sustainability scores, and chemical concerns.</p>
                 </div>
                 <div>
                     <h3>Clear A+ to F Grading</h3>
-                    <p style="opacity: 0.9; line-height: 1.7;">Every item gets a simple grade based on natural fiber percentage, microplastic risk, PFAS concerns, and overall sustainability.</p>
+                    <p>Every item gets a simple grade based on natural fiber percentage, microplastic risk, PFAS concerns, and overall sustainability.</p>
                 </div>
                 <div>
                     <h3>Better Alternatives</h3>
-                    <p style="opacity: 0.9; line-height: 1.7;">If a product doesn't meet our standards, we'll recommend an alternative that better suits your needs. No greenwashing. Just transparency.</p>
+                    <p>If a product doesn't meet our standards, we'll recommend an alternative that better suits your needs. No greenwashing. Just transparency.</p>
                 </div>
             </div>
         </div>
@@ -524,83 +499,126 @@
                 <div class="step">
                     <div class="step-icon">
                         <img src="images/Step1.png" alt="Download">
-                        <!-- Fallback if no icon: ⬇ -->
                     </div>
-                    <h3>Download the Extension</h3>
-                    <p>Sign up to get the link to the extension.</p>
+                    <div>
+                        <h3>Download the Extension</h3>
+                        <p>Sign up to get the link to the extension.</p>
+                    </div>
                 </div>
                 <div class="step">
                     <div class="step-icon">
                         <img src="images/step2.png" alt="Shop">
-                        <!-- Fallback if no icon: 🛒 -->
                     </div>
-                    <h3>Shop Anywhere</h3>
-                    <p>Browse your favorite stores like Amazon, Zara, or Reformation as usual.</p>
+                    <div>
+                        <h3>Shop Anywhere</h3>
+                        <p>Browse your favorite stores like Amazon, Zara, or Reformation as usual.</p>
+                    </div>
                 </div>
                 <div class="step">
                     <div class="step-icon">
-                        <img src="images/Step3.png" alt="Score" style="font-family: Georgia, serif; font-style: italic; font-size: 42px;">
-                        <!-- Fallback if no icon: w -->
+                        <img src="images/Step3.png" alt="Score">
                     </div>
-                    <h3>See the Score</h3>
-                    <p>Instantly view the Wove Score, fabric breakdown, and health impacts.</p>
+                    <div>
+                        <h3>See the Score</h3>
+                        <p>Instantly view the Wove Score, fabric breakdown, and health impacts.</p>
+                    </div>
                 </div>
             </div>
             <div class="steps-right">
-                [Extension Demo Screenshot]<br><br>
-                Replace with: images/extension-demo.png<br>
-                (Shows the extension in action on a product page)
+                <img src="images/extension-demo.png" alt="Extension Demo" style="max-width: 100%; border-radius: 8px;">
             </div>
         </div>
     </section>
 
     <section class="cta-section">
         <h2>First 100 get 70% off for life.</h2>
-        <form class="cta-form" id="ctaEmailForm">
+        <form class="cta-form" id="ctaEmailForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
             <input type="email" name="email" placeholder="E-Mail" required>
             <button type="submit">GET EARLY ACCESS</button>
         </form>
         <div class="success-message" id="ctaSuccess">Thanks for subscribing! Check your inbox soon.</div>
+        <div class="error-message" id="ctaError">Oops! Something went wrong. Please try again.</div>
     </section>
 
     <footer>
         <div class="footer-content">
             <p>© 2025 Wove. Shop consciously. Live comfortably.</p>
             <div class="footer-links">
-                <a href="/about.html">About</a>
-                <a href="/wove-score.htlm">How Scoring Works</a>
-                <a href="/privacy.html">Privacy Policy</a>
-                <a href="/contact.html">Contact</a>
+                <a href="/about">About</a>
+                <a href="/wovescore">How Scoring Works</a>
+                <a href="/privacypolicy">Privacy Policy</a>
+                <a href="/contact">Contact</a>
             </div>
         </div>
     </footer>
 
     <script>
-        // Email form handling
-        function handleEmailSubmit(formId, successId) {
+        // Mobile menu toggle
+        function toggleMenu(hamburger) {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.getElementById('mainNav');
+            const hamburger = document.querySelector('.hamburger');
+            if (!nav.contains(event.target) && !hamburger.contains(event.target)) {
+                nav.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mainNav').classList.remove('active');
+                document.querySelector('.hamburger').classList.remove('active');
+            });
+        });
+
+        // Email form handling with Formspree
+        function handleFormSubmit(formId, successId, errorId) {
             const form = document.getElementById(formId);
             const success = document.getElementById(successId);
+            const error = document.getElementById(errorId);
             
-            form.addEventListener('submit', function(e) {
+            form.addEventListener('submit', async function(e) {
                 e.preventDefault();
-                const email = form.querySelector('input[type="email"]').value;
                 
-                // Send to hello@woveapp.com
-                window.location.href = `mailto:hello@woveapp.com?subject=Early Access Signup&body=Email: ${email}`;
+                const formData = new FormData(form);
                 
-                // Show success message
-                success.style.display = 'block';
-                form.reset();
-                
-                // Hide after 5 seconds
-                setTimeout(() => {
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        success.style.display = 'block';
+                        error.style.display = 'none';
+                        form.reset();
+                        
+                        setTimeout(() => {
+                            success.style.display = 'none';
+                        }, 5000);
+                    } else {
+                        error.style.display = 'block';
+                        success.style.display = 'none';
+                    }
+                } catch (err) {
+                    error.style.display = 'block';
                     success.style.display = 'none';
-                }, 5000);
+                }
             });
         }
 
-        handleEmailSubmit('homeEmailForm', 'homeSuccess');
-        handleEmailSubmit('ctaEmailForm', 'ctaSuccess');
+        handleFormSubmit('homeEmailForm', 'homeSuccess', 'homeError');
+        handleFormSubmit('ctaEmailForm', 'ctaSuccess', 'ctaError');
     </script>
 </body>
 </html>
