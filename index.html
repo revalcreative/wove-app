@@ -1,2377 +1,686 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wove - Shop Consciously, Live Comfortably</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        /* Header */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 60px;
-            background: white;
-            position: relative;
-        }
-
-        .logo img {
-            height: 40px;
-            cursor: pointer;
-        }
-
-        nav {
-            display: flex;
-            gap: 40px;
-            align-items: center;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #333;
-            font-size: 14px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        nav a:hover {
-            color: #4a6d4a;
-        }
-
-        /* Mobile Menu */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-            z-index: 1001;
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background-color: #4a6d4a;
-            transition: 0.3s;
-            border-radius: 2px;
-        }
-
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(7px, 7px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-
-        @media (max-width: 768px) {
-            nav {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                height: 100vh;
-                width: 70%;
-                background-color: white;
-                flex-direction: column;
-                padding: 80px 30px;
-                box-shadow: -2px 0 5px rgba(0,0,0,0.1);
-                transition: right 0.3s ease;
-                z-index: 999;
-                gap: 30px;
-                align-items: flex-start;
-            }
-
-            nav.active {
-                right: 0;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
-            header {
-                padding: 20px 30px;
-            }
-        }
-
-        /* Home Page Specific */
-        .home-hero {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            padding: 80px 60px;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .score-card {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .score-card img {
-            max-width: 437px;
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .hero-content h1 {
-            margin-bottom: 20px;
-        }
-
-        .hero-content h1 img {
-            height: 80px;
-        }
-
-        .hero-content h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            font-weight: 400;
-            line-height: 1.3;
-        }
-
-        .cta-form {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .cta-form input {
-            flex: 1;
-            padding: 14px 20px;
-            border: 1px solid #ddd;
-            border-radius: 25px;
-            font-size: 14px;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .cta-form button {
-            padding: 14px 35px;
-            background: #4a6d4a;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-size: 12px;
-            letter-spacing: 0.5px;
-            white-space: nowrap;
-            font-family: 'Poppins', sans-serif;
-            transition: background 0.3s;
-        }
-
-        .cta-form button:hover {
-            background: #3d5a3d;
-        }
-
-        /* Analysis Section */
-        .analysis-section {
-            background: #4a6d4a;
-            color: white;
-            padding: 80px 60px;
-        }
-
-        .analysis-section h2 {
-            text-align: center;
-            font-size: 36px;
-            margin-bottom: 15px;
-            font-weight: 400;
-        }
-
-        .analysis-section > p {
-            text-align: center;
-            font-size: 18px;
-            opacity: 0.9;
-            margin-bottom: 60px;
-        }
-
-        .analysis-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .image-placeholder {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .image-placeholder img {
-            width: 100%;
-            border-radius: 8px;
-        }
-
-        .feature-list {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
-
-        .feature-list h3 {
-            font-size: 22px;
-            margin-bottom: 10px;
-            font-weight: 500;
-        }
-
-        .feature-list p {
-            opacity: 0.9;
-            line-height: 1.7;
-        }
-
-        /* How It Works - UPDATED WITH LESS SPACING */
-        .how-it-works {
-            padding: 50px 60px;
-            background: white;
-        }
-
-        .how-it-works h2 {
-            font-size: 36px;
-            margin-bottom: 10px;
-            font-weight: 400;
-            text-align: center;
-        }
-
-        .how-it-works > p {
-            font-size: 18px;
-            color: #666;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-
-        .steps-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .steps-left {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-
-        .step {
-            display: flex;
-            gap: 20px;
-        }
-
-        .step-icon {
-            flex-shrink: 0;
-        }
-
-        .step-icon img {
-            width: 60px;
-            height: 60px;
-            object-fit: contain;
-        }
-
-        .step h3 {
-            font-size: 20px;
-            margin-bottom: 8px;
-            color: #333;
-            font-weight: 500;
-        }
-
-        .step p {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        /* REMOVED .steps-right - no more screenshot */
-
-        /* CTA Section - UPDATED TO MATCH SCORE PAGE COLOR */
-        .cta-section {
-            background: #4a6d4a;
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
-        }
-
-        .cta-section h2 {
-            font-size: 32px;
-            margin-bottom: 30px;
-            font-weight: 400;
-        }
-
-        .cta-section .cta-form {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        /* Footer */
-        footer {
-            background: #4a6d4a;
-            color: white;
-            padding: 40px 60px 20px;
-            font-size: 12px;
-        }
-
-        .footer-content {
-            text-align: center;
-            opacity: 0.8;
-        }
-
-        .footer-links {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: white;
-            text-decoration: none;
-            opacity: 0.8;
-        }
-
-        .footer-links a:hover {
-            opacity: 1;
-        }
-
-        /* Mobile Styles */
-        @media (max-width: 768px) {
-            .home-hero {
-                grid-template-columns: 1fr;
-                padding: 60px 30px 30px;
-                gap: 0;
-            }
-
-            /* UPDATED: Hide desktop image, show it under Stay in the Know */
-            .score-card {
-                display: none;
-            }
-
-            .mobile-hero-image {
-                display: block !important;
-                max-width: 100%;
-                margin: 30px auto 0;
-                text-align: center;
-            }
-
-            .mobile-hero-image img {
-                max-width: 300px;
-                width: 100%;
-                height: auto;
-            }
-
-            .analysis-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .analysis-section {
-                padding: 60px 30px;
-            }
-
-            .how-it-works {
-                padding: 40px 30px;
-            }
-
-            .hero-content h2 {
-                font-size: 28px;
-            }
-
-            .cta-form {
-                flex-direction: column;
-            }
-
-            .cta-form button {
-                width: 100%;
-            }
-        }
-
-        /* Desktop: hide mobile hero image */
-        .mobile-hero-image {
-            display: none;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wove - Shop Consciously, Live Comfortably</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --wove-green: #5B6B54;
+    --wove-green-dark: #4A5A42;
+    --wove-green-deep: #3D4D36;
+    --wove-green-pale: #E8EDE6;
+    --wove-cream: #F0EBE3;
+    --wove-cream-light: #F5F1EB;
+    --wove-white: #FFFFFF;
+    --wove-charcoal: #2A2A2A;
+    --wove-text: #333333;
+    --wove-text-light: #6B6B6B;
+    --wove-text-muted: #9A9A9A;
+    --wove-border: rgba(0,0,0,0.06);
+    --score-a: #5B6B54;
+    --score-b: #7A9A6E;
+    --score-c: #E5A336;
+    --score-d: #E07B4C;
+    --score-f: #B05050;
+    --radius-card: 20px;
+    --radius-full: 50px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--wove-text);
+    background: var(--wove-cream);
+    overflow-x: hidden;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  /* PLACEHOLDERS */
+  .logo-placeholder {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 120px; height: 44px;
+    border: 2px dashed var(--wove-green);
+    border-radius: 12px;
+    font-size: 11px; font-weight: 700;
+    color: var(--wove-green);
+    letter-spacing: 1.5px;
+    background: rgba(91,107,84,0.05);
+  }
+  .logo-placeholder.dark {
+    border-color: rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.05);
+  }
+  .placeholder-box {
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 2px dashed var(--wove-text-muted);
+    border-radius: 10px;
+    font-size: 10px; font-weight: 700;
+    color: var(--wove-text-muted);
+    letter-spacing: 1px;
+    background: rgba(0,0,0,0.03);
+  }
+  .placeholder-box.store-badge {
+    width: 180px; height: 56px;
+    border-color: var(--wove-charcoal);
+    color: var(--wove-charcoal);
+    background: rgba(0,0,0,0.04);
+  }
+  .placeholder-box.cta-badge {
+    border-color: rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.06);
+  }
+  .app-store-placeholder { text-decoration: none; display: inline-block; }
+  .icon-placeholder {
+    display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px;
+    border: 2px dashed var(--wove-text-muted);
+    border-radius: 10px;
+    font-size: 8px; font-weight: 700;
+    color: var(--wove-text-muted);
+    letter-spacing: 0.5px;
+    background: rgba(0,0,0,0.03);
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(240, 235, 227, 0.9);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 0 48px;
+    height: 68px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--wove-border);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.04); }
+  .nav-logo { display: flex; align-items: center; text-decoration: none; }
+  .nav-links { display: flex; align-items: center; gap: 32px; }
+  .nav-links a {
+    text-decoration: none; color: var(--wove-text);
+    font-size: 14px; font-weight: 500; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--wove-green-dark); }
+  .nav-cta {
+    background: var(--wove-green) !important; color: white !important;
+    padding: 10px 26px; border-radius: var(--radius-full);
+    font-weight: 600 !important; font-size: 13px !important;
+    transition: all 0.25s !important;
+  }
+  .nav-cta:hover {
+    background: var(--wove-green-deep) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(91,107,84,0.25);
+  }
+
+  /* HERO */
+  .hero {
+    padding: 130px 48px 100px;
+    min-height: 100vh;
+    display: flex; align-items: center;
+    background: var(--wove-cream);
+  }
+  .hero-inner {
+    max-width: 1140px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 72px; align-items: center; width: 100%;
+  }
+  .hero-content { z-index: 2; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--wove-green-pale); color: var(--wove-green-dark);
+    padding: 8px 18px; border-radius: var(--radius-full);
+    font-size: 12px; font-weight: 600; margin-bottom: 28px;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-tag-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--wove-green); animation: pulse 2s ease infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .hero h1 {
+    font-size: clamp(38px, 4.5vw, 58px);
+    color: var(--wove-green-dark);
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s ease 0.1s both;
+  }
+  .hero-desc {
+    font-size: 16px; color: var(--wove-text-light);
+    max-width: 460px; margin-bottom: 36px;
+    animation: fadeUp 0.6s ease 0.2s both;
+  }
+  .hero-actions {
+    display: flex; gap: 14px; flex-wrap: wrap; align-items: center;
+    animation: fadeUp 0.6s ease 0.3s both;
+  }
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: transparent; color: var(--wove-text);
+    padding: 16px 28px; border-radius: var(--radius-full);
+    font-size: 15px; font-weight: 600; text-decoration: none;
+    border: 1.5px solid var(--wove-border); transition: all 0.3s;
+  }
+  .btn-ghost:hover {
+    border-color: var(--wove-green); color: var(--wove-green-dark);
+    background: var(--wove-green-pale);
+  }
+  .hero-visual {
+    display: flex; justify-content: center;
+    animation: fadeUp 0.8s ease 0.3s both;
+  }
+  .app-image-placeholder {
+    width: 300px; height: 600px;
+    border: 3px dashed var(--wove-text-muted);
+    border-radius: 44px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 12px;
+    color: var(--wove-text-muted);
+    background: rgba(255,255,255,0.4);
+  }
+  .app-image-placeholder span { font-size: 13px; font-weight: 600; }
+  .app-image-placeholder .hint { font-size: 11px; font-weight: 400; opacity: 0.6; }
+
+  /* SHARED SECTION STYLES */
+  .section-header {
+    text-align: center; max-width: 560px; margin: 0 auto 56px;
+  }
+  .section-label {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--wove-green); margin-bottom: 14px;
+  }
+  .section-header h2 {
+    font-size: clamp(30px, 3.5vw, 44px);
+    color: var(--wove-green-dark); margin-bottom: 14px;
+  }
+  .section-header p { font-size: 15px; color: var(--wove-text-light); }
+
+  /* INDEPENDENCE */
+  .section-independence { padding: 110px 48px; background: var(--wove-white); }
+  .ind-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; max-width: 960px; margin: 0 auto;
+  }
+  .ind-card {
+    padding: 36px 28px; border-radius: var(--radius-card);
+    background: var(--wove-cream-light); text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .ind-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.05); }
+  .ind-icon {
+    width: 68px; height: 68px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+  }
+  .ind-card:nth-child(1) .ind-icon { background: var(--wove-green-pale); }
+  .ind-card:nth-child(2) .ind-icon { background: #FFF3E0; }
+  .ind-card:nth-child(3) .ind-icon { background: #FCE4EC; }
+  .ind-card h3 { font-size: 20px; color: var(--wove-green-dark); margin-bottom: 10px; }
+  .ind-card p { font-size: 14px; color: var(--wove-text-light); line-height: 1.7; }
+
+  /* HOW IT WORKS */
+  .section-how { padding: 110px 48px; background: var(--wove-cream); }
+  .how-steps {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 40px; max-width: 960px; margin: 0 auto;
+  }
+  .how-step { text-align: center; }
+  .how-step-num {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: var(--wove-green); color: white;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 24px;
+  }
+  .how-step-icon {
+    width: 76px; height: 76px; border-radius: var(--radius-card);
+    background: var(--wove-white);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 18px; box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .how-step h3 { font-size: 20px; color: var(--wove-green-dark); margin-bottom: 8px; }
+  .how-step p { font-size: 14px; color: var(--wove-text-light); max-width: 260px; margin: 0 auto; line-height: 1.7; }
+
+  /* WHAT WE REVEAL */
+  .section-reveal { padding: 110px 48px; background: var(--wove-white); }
+  .reveal-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 20px; max-width: 1000px; margin: 0 auto;
+  }
+  .reveal-card {
+    padding: 32px 20px; border-radius: var(--radius-card);
+    background: var(--wove-cream-light); text-align: center;
+    transition: transform 0.3s;
+  }
+  .reveal-card:hover { transform: translateY(-4px); }
+  .reveal-icon { margin-bottom: 14px; display: flex; justify-content: center; }
+  .reveal-card h4 { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--wove-green-dark); margin-bottom: 8px; }
+  .reveal-card p { font-size: 13px; color: var(--wove-text-light); line-height: 1.7; }
+
+  /* ALTERNATIVES — APP-STYLE CARDS */
+  .section-demo { padding: 110px 48px; background: var(--wove-cream); }
+  .demo-container {
+    max-width: 860px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    gap: 28px; align-items: center;
+  }
+  .app-card {
+    background: var(--wove-white); border-radius: var(--radius-card);
+    overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+  }
+  .app-card-header {
+    background: var(--wove-green); padding: 20px 24px;
+    color: white; text-align: center;
+  }
+  .app-card-header h4 {
+    font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600; line-height: 1.4;
+  }
+  .app-card-body { padding: 28px 24px; background: var(--wove-cream-light); }
+  .score-circle {
+    width: 120px; height: 120px; border-radius: 50%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    margin: 0 auto 12px; color: white;
+  }
+  .score-circle.green { background: var(--score-a); }
+  .score-circle.orange { background: var(--score-b); }
+  .score-circle-num { font-family: 'Poppins', sans-serif; font-size: 36px; font-weight: 700; line-height: 1; }
+  .score-circle-grade { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 600; opacity: 0.9; }
+  .score-circle-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--wove-text-muted);
+    text-align: center; margin-bottom: 20px;
+  }
+  .score-details { border-top: 1px solid var(--wove-border); padding-top: 20px; }
+  .score-detail-row {
+    display: flex; justify-content: space-between;
+    padding: 8px 0; font-size: 14px;
+  }
+  .score-detail-row span:first-child { color: var(--wove-text); }
+  .score-detail-row span:last-child { font-weight: 600; }
+  .val-good { color: var(--wove-green-dark); }
+  .val-bad { color: var(--score-d); }
+  .val-neutral { color: var(--wove-text); }
+  .detected-fabrics {
+    margin-top: 20px; padding-top: 16px;
+    border-top: 1px solid var(--wove-border);
+  }
+  .detected-fabrics h5 {
+    font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--wove-text-muted); margin-bottom: 12px;
+  }
+  .fabric-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 0;
+  }
+  .fabric-row + .fabric-row { border-top: 1px solid var(--wove-border); }
+  .fabric-name { font-size: 14px; font-weight: 600; }
+  .fabric-pct { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; }
+  .fabric-tag {
+    display: inline-block; padding: 2px 10px; border-radius: var(--radius-full);
+    font-size: 10px; font-weight: 700; letter-spacing: 0.5px;
+    text-transform: uppercase; margin-top: 2px;
+  }
+  .fabric-tag.natural { background: var(--wove-green-pale); color: var(--wove-green-dark); }
+  .fabric-tag.synthetic { background: #FDE8E0; color: var(--score-d); }
+  .demo-arrow { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .demo-arrow-icon {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--wove-green); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; box-shadow: 0 6px 20px rgba(91,107,84,0.25);
+    animation: pulse-arrow 2s ease infinite;
+  }
+  @keyframes pulse-arrow { 0%,100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+  .demo-arrow span {
+    font-size: 10px; color: var(--wove-text-muted);
+    font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+  }
+
+  /* CTA */
+  .section-cta {
+    padding: 110px 48px; background: var(--wove-green);
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .section-cta::before {
+    content: ''; position: absolute; top: -50%; left: -20%;
+    width: 60%; height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .section-cta h2 {
+    font-size: clamp(30px, 4vw, 48px); color: white;
+    margin-bottom: 14px; position: relative;
+  }
+  .section-cta p {
+    font-size: 16px; color: rgba(255,255,255,0.75);
+    max-width: 440px; margin: 0 auto 36px; position: relative;
+  }
+  .cta-buttons {
+    display: flex; gap: 16px; justify-content: center;
+    flex-wrap: wrap; position: relative;
+  }
+  .btn-outline-white {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: transparent; color: white;
+    padding: 14px 32px; border-radius: var(--radius-full);
+    font-size: 14px; font-weight: 600; text-decoration: none;
+    border: 1.5px solid rgba(255,255,255,0.3); transition: all 0.3s;
+  }
+  .btn-outline-white:hover { border-color: white; background: rgba(255,255,255,0.08); }
+
+  /* FOOTER */
+  footer {
+    padding: 56px 48px 28px; background: var(--wove-charcoal);
+    color: rgba(255,255,255,0.55);
+  }
+  .footer-inner { max-width: 960px; margin: 0 auto; }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr;
+    gap: 56px; margin-bottom: 40px;
+  }
+  .footer-brand-name { margin-bottom: 12px; }
+  .footer-brand p { font-size: 13px; line-height: 1.7; max-width: 300px; }
+  .footer-col h4 {
+    font-family: 'Poppins', sans-serif; color: white;
+    font-size: 12px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.5px; margin-bottom: 18px;
+  }
+  .footer-col a {
+    display: block; color: rgba(255,255,255,0.45);
+    text-decoration: none; font-size: 13px; padding: 4px 0;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: white; }
+  .footer-bottom {
+    padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08);
+    font-size: 12px; text-align: center; color: rgba(255,255,255,0.3);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .scroll-reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .scroll-reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 960px) {
+    nav { padding: 0 24px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    .hero { padding: 110px 24px 70px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 50px; text-align: center; }
+    .hero-desc { margin-left: auto; margin-right: auto; }
+    .hero-actions { justify-content: center; }
+    .section-independence, .section-how, .section-reveal, .section-demo, .section-cta { padding: 80px 24px; }
+    .ind-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
+    .how-steps { grid-template-columns: 1fr; max-width: 300px; margin: 0 auto; gap: 36px; }
+    .reveal-grid { grid-template-columns: repeat(2, 1fr); }
+    .demo-container { grid-template-columns: 1fr; max-width: 380px; }
+    .demo-arrow { flex-direction: row; }
+    .demo-arrow-icon { transform: rotate(90deg); }
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  }
+  @media (max-width: 540px) {
+    .reveal-grid { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; }
+    .app-image-placeholder { width: 240px; height: 480px; }
+  }
+</style>
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <a href="/"><img src="images/WoveLogo.png" alt="wove"></a>
+
+<nav id="main-nav">
+  <a href="/" class="nav-logo"><div class="logo-placeholder">LOGO</div></a>
+  <div class="nav-links">
+    <a href="#how-it-works">How It Works</a>
+    <a href="#independence">Independence</a>
+    <a href="/wovescore">Wove Score</a>
+    <a href="https://apps.apple.com/us/app/wove-score/id6755356871" class="nav-cta">Download App</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-tag">
+        <span class="hero-tag-dot"></span>
+        100% Independent
+      </div>
+      <h1>Shop consciously.<br>Live comfortably.</h1>
+      <p class="hero-desc">Wove deciphers clothing labels and reveals the true impact of your fabrics — microplastics, PFAS, sustainability, and more. No ads. No brand deals. Just transparency.</p>
+      <div class="hero-actions">
+        <a href="https://apps.apple.com/us/app/wove-score/id6755356871" class="app-store-placeholder">
+          <div class="placeholder-box store-badge">APP STORE BADGE</div>
+        </a>
+        <a href="#how-it-works" class="btn-ghost">How It Works</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="app-image-placeholder">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <span>App Screenshot</span>
+        <span class="hint">Replace with actual app image</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-independence" id="independence">
+  <div class="section-header scroll-reveal">
+    <span class="section-label">100% Independent</span>
+    <h2>Transparency you can trust</h2>
+    <p>Wove is completely independent. No brand pays us to score their products. No ads. No conflicts of interest.</p>
+  </div>
+  <div class="ind-grid">
+    <div class="ind-card scroll-reveal">
+      <div class="ind-icon"><div class="icon-placeholder">ICON</div></div>
+      <h3>No brand influence</h3>
+      <p>No manufacturer or brand can influence the scores or recommendations Wove provides. Every grade is earned — never purchased.</p>
+    </div>
+    <div class="ind-card scroll-reveal" style="transition-delay:0.1s">
+      <div class="ind-icon"><div class="icon-placeholder">ICON</div></div>
+      <h3>No ads</h3>
+      <p>Wove is completely ad-free. Brands cannot pay to advertise their products or promote themselves within our app. Ever.</p>
+    </div>
+    <div class="ind-card scroll-reveal" style="transition-delay:0.2s">
+      <div class="ind-icon"><div class="icon-placeholder">ICON</div></div>
+      <h3>Data protection</h3>
+      <p>We never sell your data. Your personal information stays private and is never shared for commercial purposes.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-how" id="how-it-works">
+  <div class="section-header scroll-reveal">
+    <span class="section-label">Simple & Intuitive</span>
+    <h2>Three steps to clarity</h2>
+    <p>Understanding what your clothes are really made of has never been easier.</p>
+  </div>
+  <div class="how-steps">
+    <div class="how-step scroll-reveal">
+      <div class="how-step-num">1</div>
+      <div class="how-step-icon"><div class="icon-placeholder">ICON</div></div>
+      <h3>Download Wove</h3>
+      <p>Get the free app on iOS. Set up in seconds with no complicated onboarding.</p>
+    </div>
+    <div class="how-step scroll-reveal" style="transition-delay:0.12s">
+      <div class="how-step-num">2</div>
+      <div class="how-step-icon"><div class="icon-placeholder">ICON</div></div>
+      <h3>Scan any item</h3>
+      <p>Use a URL, photo, screenshot, or product description. Wove handles the rest instantly.</p>
+    </div>
+    <div class="how-step scroll-reveal" style="transition-delay:0.24s">
+      <div class="how-step-num">3</div>
+      <div class="how-step-icon"><div class="icon-placeholder">ICON</div></div>
+      <h3>See the score</h3>
+      <p>Instantly view the Wove Score, full fiber breakdown, and health impact details.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-reveal">
+  <div class="section-header scroll-reveal">
+    <span class="section-label">Deep Analysis</span>
+    <h2>What Wove reveals</h2>
+    <p>The information brands don't put on the label.</p>
+  </div>
+  <div class="reveal-grid">
+    <div class="reveal-card scroll-reveal">
+      <div class="reveal-icon"><div class="icon-placeholder">ICON</div></div>
+      <h4>Microplastics</h4>
+      <p>Synthetic fabrics shed tiny plastic particles that enter waterways and your body with every wash.</p>
+    </div>
+    <div class="reveal-card scroll-reveal" style="transition-delay:0.08s">
+      <div class="reveal-icon"><div class="icon-placeholder">ICON</div></div>
+      <h4>Natural Fiber %</h4>
+      <p>How much of your garment is cotton, wool, linen, or silk versus synthetic materials.</p>
+    </div>
+    <div class="reveal-card scroll-reveal" style="transition-delay:0.16s">
+      <div class="reveal-icon"><div class="icon-placeholder">ICON</div></div>
+      <h4>PFAS Chemicals</h4>
+      <p>"Forever chemicals" linked to health concerns, often hidden in water-resistant and stain-proof clothing.</p>
+    </div>
+    <div class="reveal-card scroll-reveal" style="transition-delay:0.24s">
+      <div class="reveal-icon"><div class="icon-placeholder">ICON</div></div>
+      <h4>Sustainability</h4>
+      <p>Overall environmental impact based on materials, durability, and biodegradability.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-demo">
+  <div class="section-header scroll-reveal">
+    <span class="section-label">Better Choices</span>
+    <h2>Find healthier alternatives</h2>
+    <p>When a product doesn't meet standards, Wove helps you find one that does. No greenwashing — just transparency.</p>
+  </div>
+  <div class="demo-container scroll-reveal">
+    <div class="app-card">
+      <div class="app-card-header">
+        <h4>Everlane The Tencel<br>Way-High Drape Pant</h4>
+      </div>
+      <div class="app-card-body">
+        <div class="score-circle orange">
+          <span class="score-circle-num">79</span>
+          <span class="score-circle-grade">(B)</span>
         </div>
-        <div class="hamburger" onclick="toggleMenu(this)">
-            <span></span>
-            <span></span>
-            <span></span>
+        <div class="score-circle-label">Wove Score</div>
+        <div class="score-details">
+          <div class="score-detail-row"><span>Natural Fibers:</span><span class="val-neutral">34%</span></div>
+          <div class="score-detail-row"><span>Synthetic+Semi:</span><span class="val-neutral">66%</span></div>
+          <div class="score-detail-row"><span>Microplastic Risk:</span><span class="val-bad">High</span></div>
+          <div class="score-detail-row"><span>PFAS Concern:</span><span class="val-neutral">No</span></div>
         </div>
-        <nav id="mainNav">
-            <a href="/about">THE STORY</a>
-            <a href="/wovescore">WOVE SCORE</a>
-            <!-- <a href="EXTERNAL_LINK_HERE" target="_blank">GET THE EXTENSION</a> -->
-        </nav>
-    </header>
-
-    <!-- Home Page Content -->
-    <section class="home-hero">
-        <div class="score-card">
-            <img src="images/Wove-Sample.png" alt="WoveApp">
-        </div>
-          
-        <div class="hero-content">
-            <h1><img src="images/WoveLogo.png" alt="wove"></h1>
-            <h2>Shop consciously.<br>Live comfortably.</h2>
-            <p style="color: #666; margin-bottom: 15px; line-height: 1.7;">Wove helps you understand what your clothes are really made of — instantly.</p>
-            <p style="color: #666; margin-bottom: 30px; line-height: 1.7;">Scan any product online to reveal its fabric composition, sustainability score, and microplastic impact.</p>
-            
-<style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1761043");</style>
-    <style type="text/css">
-    /* LOADER */
-    .ml-form-embedSubmitLoad {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-    }
-
-    .g-recaptcha {
-    transform: scale(1);
-    -webkit-transform: scale(1);
-    transform-origin: 0 0;
-    -webkit-transform-origin: 0 0;
-    height: ;
-    }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0,0,0,0);
-      border: 0;
-    }
-
-    .ml-form-embedSubmitLoad:after {
-      content: " ";
-      display: block;
-      width: 11px;
-      height: 11px;
-      margin: 1px;
-      border-radius: 50%;
-      border: 4px solid #fff;
-    border-color: #ffffff #ffffff #ffffff transparent;
-    animation: ml-form-embedSubmitLoad 1.2s linear infinite;
-    }
-    @keyframes ml-form-embedSubmitLoad {
-      0% {
-      transform: rotate(0deg);
-      }
-      100% {
-      transform: rotate(360deg);
-      }
-    }
-      #mlb2-32441640.ml-form-embedContainer {
-        box-sizing: border-box;
-        display: table;
-        margin: 0 auto;
-        position: static;
-        width: 100% !important;
-      }
-      #mlb2-32441640.ml-form-embedContainer h4,
-      #mlb2-32441640.ml-form-embedContainer p,
-      #mlb2-32441640.ml-form-embedContainer span,
-      #mlb2-32441640.ml-form-embedContainer button {
-        text-transform: none !important;
-        letter-spacing: normal !important;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper {
-        background-color: ;
-        
-        border-width: 0px;
-        border-color: transparent;
-        border-radius: 4px;
-        border-style: solid;
-        box-sizing: border-box;
-        display: inline-block !important;
-        margin: 0;
-        padding: 0;
-        position: relative;
-              }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper.embedPopup,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper.embedDefault { width: 400px; }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper.embedForm { max-width: 400px; width: 100%; }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-align-left { text-align: left; }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-align-center { text-align: center; }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-align-default { display: table-cell !important; vertical-align: middle !important; text-align: center !important; }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-align-right { text-align: right; }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedHeader img {
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
-        height: auto;
-        margin: 0 auto !important;
-        max-width: 100%;
-        width: undefinedpx;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody {
-        padding: 20px 20px 0 20px;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody.ml-form-embedBodyHorizontal {
-        padding-bottom: 0;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent {
-        text-align: left;
-        margin: 0 0 20px 0;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent h4,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent h4 {
-        color: #000000;
-        font-family: 'Poppins', sans-serif;
-        font-size: 30px;
-        font-weight: 400;
-        margin: 0 0 10px 0;
-        text-align: center;
-        word-break: break-word;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent p,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p {
-        color: #000000;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 20px;
-        margin: 0 0 10px 0;
-        text-align: left;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ul,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ol,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ul,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ol {
-        color: #000000;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-size: 14px;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ol ol,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ol ol {
-        list-style-type: lower-alpha;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ol ol ol,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ol ol ol {
-        list-style-type: lower-roman;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent p a,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p a {
-        color: #000000;
-        text-decoration: underline;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-block-form .ml-field-group {
-        text-align: left!important;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-block-form .ml-field-group label {
-        margin-bottom: 5px;
-        color: #333333;
-        font-size: 14px;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-weight: bold; font-style: normal; text-decoration: none;;
-        display: inline-block;
-        line-height: 20px;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent p:last-child,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p:last-child {
-        margin: 0;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody form {
-        margin: 0;
-        width: 100%;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-formContent,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow {
-        margin: 0 0 20px 0;
-        width: 100%;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow {
-        float: left;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-formContent.horozintalForm {
-        margin: 0;
-        padding: 0 0 20px 0;
-        width: 100%;
-        height: auto;
-        float: left;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow {
-        margin: 0 0 10px 0;
-        width: 100%;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow.ml-last-item {
-        margin: 0;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow.ml-formfieldHorizintal {
-        margin: 0;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input {
-        background-color: #ffffff !important;
-        color: #333333 !important;
-        border-color: #cccccc;
-        border-radius: 4px !important;
-        border-style: solid !important;
-        border-width: 1px !important;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-size: 14px !important;
-        height: auto;
-        line-height: 21px !important;
-        margin-bottom: 0;
-        margin-top: 0;
-        margin-left: 0;
-        margin-right: 0;
-        padding: 10px 10px !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-        max-width: 100% !important;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input::-webkit-input-placeholder,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input::-webkit-input-placeholder { color: #333333; }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input::-moz-placeholder,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input::-moz-placeholder { color: #333333; }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input:-ms-input-placeholder,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input:-ms-input-placeholder { color: #333333; }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input:-moz-placeholder,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input:-moz-placeholder { color: #333333; }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow textarea, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow textarea {
-        background-color: #ffffff !important;
-        color: #333333 !important;
-        border-color: #cccccc;
-        border-radius: 4px !important;
-        border-style: solid !important;
-        border-width: 1px !important;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-size: 14px !important;
-        height: auto;
-        line-height: 21px !important;
-        margin-bottom: 0;
-        margin-top: 0;
-        padding: 10px 10px !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-        max-width: 100% !important;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before {
-          border-color: #cccccc!important;
-          background-color: #ffffff!important;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input.custom-control-input[type="checkbox"]{
-        box-sizing: border-box;
-        padding: 0;
-        position: absolute;
-        z-index: -1;
-        opacity: 0;
-        margin-top: 5px;
-        margin-left: -1.5rem;
-        overflow: visible;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before {
-        border-radius: 4px!important;
-      }
-
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type=checkbox]:checked~.label-description::after, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox input[type=checkbox]:checked~.label-description::after, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-input:checked~.custom-control-label::after, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-input:checked~.custom-control-label::after, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox input[type=checkbox]:checked~.label-description::after {
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input:checked~.custom-control-label::after, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input:checked~.custom-control-label::after {
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input:checked~.custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-input:checked~.custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-input:checked~.custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-input:checked~.custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox input[type=checkbox]:checked~.label-description::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox input[type=checkbox]:checked~.label-description::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type=checkbox]:checked~.label-description::before  {
-          border-color: #000000!important;
-          background-color: #000000!important;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label::after, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label::after, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::after, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-control-label::after {
-           top: 2px;
-           box-sizing: border-box;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::after, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
-        top: 0px!important;
-        box-sizing: border-box!important;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
-        top: 0px!important;
-           box-sizing: border-box!important;
-      }
-
-       #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::after {
-            top: 0px!important;
-            box-sizing: border-box!important;
-            position: absolute;
-            left: -1.5rem;
-            display: block;
-            width: 1rem;
-            height: 1rem;
-            content: "";
-       }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before {
-        top: 0px!important;
-        box-sizing: border-box!important;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-control-label::before {
-          position: absolute;
-          top: 4px;
-          left: -1.5rem;
-          display: block;
-          width: 16px;
-          height: 16px;
-          pointer-events: none;
-          content: "";
-          background-color: #ffffff;
-          border: #adb5bd solid 1px;
-          border-radius: 50%;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-control-label::after {
-          position: absolute;
-          top: 2px!important;
-          left: -1.5rem;
-          display: block;
-          width: 1rem;
-          height: 1rem;
-          content: "";
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before {
-          position: absolute;
-          top: 4px;
-          left: -1.5rem;
-          display: block;
-          width: 16px;
-          height: 16px;
-          pointer-events: none;
-          content: "";
-          background-color: #ffffff;
-          border: #adb5bd solid 1px;
-          border-radius: 50%;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::after {
-          position: absolute;
-          top: 0px!important;
-          left: -1.5rem;
-          display: block;
-          width: 1rem;
-          height: 1rem;
-          content: "";
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
-          position: absolute;
-          top: 0px!important;
-          left: -1.5rem;
-          display: block;
-          width: 1rem;
-          height: 1rem;
-          content: "";
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-radio .custom-control-label::after {
-          background: no-repeat 50%/50% 50%;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-checkbox .custom-control-label::after, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::after, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::after, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
-          background: no-repeat 50%/50% 50%;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-control, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-control {
-        position: relative;
-        display: block;
-        min-height: 1.5rem;
-        padding-left: 1.5rem;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-input, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-input, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-input {
-          position: absolute;
-          z-index: -1;
-          opacity: 0;
-          box-sizing: border-box;
-          padding: 0;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label {
-          color: #000000;
-          font-size: 12px!important;
-          font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-          line-height: 22px;
-          margin-bottom: 0;
-          position: relative;
-          vertical-align: top;
-          font-style: normal;
-          font-weight: 700;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-select, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-select {
-        background-color: #ffffff !important;
-        color: #333333 !important;
-        border-color: #cccccc;
-        border-radius: 4px !important;
-        border-style: solid !important;
-        border-width: 1px !important;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-size: 14px !important;
-        line-height: 20px !important;
-        margin-bottom: 0;
-        margin-top: 0;
-        padding: 10px 28px 10px 12px !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-        max-width: 100% !important;
-        height: auto;
-        display: inline-block;
-        vertical-align: middle;
-        background: url('https://assets.mlcdn.com/ml/images/default/dropdown.svg') no-repeat right .75rem center/8px 10px;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-      }
-
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow {
-        height: auto;
-        width: 100%;
-        float: left;
-      }
-      .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal { width: 70%; float: left; }
-      .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-button-horizontal { width: 30%; float: left; }
-      .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-button-horizontal.labelsOn { padding-top: 25px;  }
-      .ml-form-formContent.horozintalForm .ml-form-horizontalRow .horizontal-fields { box-sizing: border-box; float: left; padding-right: 10px;  }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input {
-        background-color: #ffffff;
-        color: #333333;
-        border-color: #cccccc;
-        border-radius: 4px;
-        border-style: solid;
-        border-width: 1px;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-size: 14px;
-        line-height: 20px;
-        margin-bottom: 0;
-        margin-top: 0;
-        padding: 10px 10px;
-        width: 100%;
-        box-sizing: border-box;
-        overflow-y: initial;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow button {
-        background-color: #000000 !important;
-        border-color: #000000;
-        border-style: solid;
-        border-width: 1px;
-        border-radius: 4px;
-        box-shadow: none;
-        color: #ffffff !important;
-        cursor: pointer;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-size: 14px !important;
-        font-weight: 700;
-        line-height: 20px;
-        margin: 0 !important;
-        padding: 10px !important;
-        width: 100%;
-        height: auto;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow button:hover {
-        background-color: #333333 !important;
-        border-color: #333333 !important;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type="checkbox"] {
-        box-sizing: border-box;
-        padding: 0;
-        position: absolute;
-        z-index: -1;
-        opacity: 0;
-        margin-top: 5px;
-        margin-left: -1.5rem;
-        overflow: visible;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description {
-        color: #000000;
-        display: block;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-size: 12px;
-        text-align: left;
-        margin-bottom: 0;
-        position: relative;
-        vertical-align: top;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label {
-        font-weight: normal;
-        margin: 0;
-        padding: 0;
-        position: relative;
-        display: block;
-        min-height: 24px;
-        padding-left: 24px;
-
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label a {
-        color: #000000;
-        text-decoration: underline;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label p {
-        color: #000000 !important;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
-        font-size: 12px !important;
-        font-weight: normal !important;
-        line-height: 18px !important;
-        padding: 0 !important;
-        margin: 0 5px 0 0 !important;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label p:last-child {
-        margin: 0;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit {
-        margin: 0 0 20px 0;
-        float: left;
-        width: 100%;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button {
-        background-color: #000000 !important;
-        border: none !important;
-        border-radius: 4px !important;
-        box-shadow: none !important;
-        color: #ffffff !important;
-        cursor: pointer;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
-        font-size: 14px !important;
-        font-weight: 700 !important;
-        line-height: 21px !important;
-        height: auto;
-        padding: 10px !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button.loading {
-        display: none;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button:hover {
-        background-color: #333333 !important;
-      }
-      .ml-subscribe-close {
-        width: 30px;
-        height: 30px;
-        background: url('https://assets.mlcdn.com/ml/images/default/modal_close.png') no-repeat;
-        background-size: 30px;
-        cursor: pointer;
-        margin-top: -10px;
-        margin-right: -10px;
-        position: absolute;
-        top: 0;
-        right: 0;
-      }
-      .ml-error input, .ml-error textarea, .ml-error select {
-        border-color: red!important;
-      }
-
-      .ml-error .custom-checkbox-radio-list {
-        border: 1px solid red !important;
-        border-radius: 4px;
-        padding: 10px;
-      }
-
-      .ml-error .label-description,
-      .ml-error .label-description p,
-      .ml-error .label-description p a,
-      .ml-error label:first-child {
-        color: #ff0000 !important;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow.ml-error .label-description p,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow.ml-error .label-description p:first-letter {
-        color: #ff0000 !important;
-      }
-              @media only screen and (max-width: 400px){
-
-        .ml-form-embedWrapper.embedDefault, .ml-form-embedWrapper.embedPopup { width: 100%!important; }
-        .ml-form-formContent.horozintalForm { float: left!important; }
-        .ml-form-formContent.horozintalForm .ml-form-horizontalRow { height: auto!important; width: 100%!important; float: left!important; }
-        .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal { width: 100%!important; }
-        .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal > div { padding-right: 0px!important; padding-bottom: 10px; }
-        .ml-form-formContent.horozintalForm .ml-button-horizontal { width: 100%!important; }
-        .ml-form-formContent.horozintalForm .ml-button-horizontal.labelsOn { padding-top: 0px!important; }
-
-      }
-
-      @media only screen and (max-width: 400px) {
-        #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-formContent.horozintalForm {
-          padding: 0 0 10px 0 !important;
-        }
-        .ml-hide-horizontal { display: none !important; }
-        .ml-form-formContent.horozintalForm .ml-button-horizontal { display: none!important; }
-        .ml-mobileButton-horizontal { display: inline-block !important; margin-bottom: 20px;width:100%; }
-        .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal > div { padding-bottom: 0px !important; }
-      }
-
-    </style>
-  <style type="text/css">
-    @media only screen and (max-width: 400px) {
-       .ml-form-formContent.horozintalForm .ml-form-horizontalRow .horizontal-fields {
-        margin-bottom: 10px !important;
-        width: 100% !important;
-      }
-    }
-  </style>
-    
-    
-
-    
-    
-
-    
-    
-
-    
-
-      
-        
-        
-      
-
-      
-        
-        
-      
-
-      
-
-            
-            
-            
-            
-            
-            
-      
-
-      
-
-      
-        
-        
-         
-        
-        
-      
-
-        
-        
-        
-        
-        
-        
-      
-
-       
-
-        
-        
-        
-        
-        
-        
-        
-       
-
-
-      
-        
-        
-        
-        
-  
-
-
-
-  
-        
-        
-        
-      
-
-
-      
-    
-    
-    
-    
-    
-    
-    
-  
-
-  
-        
-        
-        
-        
-        
-      
-
-      
-        
-        
-        
-        
-        
-      
-
-      
-        
-        
-        
-        
-        
-      
-
-       
-
-        
-        
-        
-        
-       
-
-       
-        
-        
-        
-        
-      
-
-      
-        
-        
-        
-        
-        
-        
-        
-       
-
-    
-
-    
-
-
-      
-
-
-      
-
-      
-      
-
-      
-
-      
-
-
-
-
-    
-
-      
-    <div id="mlb2-32441640" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-32441640">
-      <div class="ml-form-align-center ">
-        <div class="ml-form-embedWrapper embedForm">
-
-          
-          
-
-          <div class="ml-form-embedBody ml-form-embedBodyHorizontal row-form">
-
-            <div class="ml-form-embedContent" style=" ">
-              
-                <h4>Stay in the know!</h4>
-                <p style="text-align: center;">Signup for news and special offers!</p>
-              
-            </div>
-
-            <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/1875516/forms/169059156253213913/subscribe" data-code="" method="post" target="_blank">
-              
-
-              <div class="ml-form-formContent horozintalForm">
-                <div class="ml-form-horizontalRow">
-                  <div class="ml-input-horizontal">
-                    
-                      
-                      <div style="width: 100%;" class="horizontal-fields">
-
-
-
-
-
-
-                        <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
-                          
-                          <!-- input -->
-                      <input type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="Email" autocomplete="email">
-                      <!-- /input -->
-                        </div>
-
-
-
-                      </div>
-                    
-                  </div>
-
-
-                  <div class="ml-button-horizontal primary ">
-                    
-                      <button type="submit" class="primary">Subscribe</button>
-                    
-                    <button disabled="disabled" style="display: none;" type="button" class="loading">
-                      <div class="ml-form-embedSubmitLoad"></div>
-                      <span class="sr-only">Loading...</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Privacy policy -->
-              
-              <!-- /Privacy policy -->
-
-              
-
-              
-
-              
-
-
-
-
-
-
-              
-              <input type="hidden" name="ml-submit" value="1">
-
-              
-
-              <div class="ml-mobileButton-horizontal">
-                <button type="submit" class="primary">Subscribe</button>
-                <button disabled="disabled" style="display: none;" type="button" class="loading">
-                  <div class="ml-form-embedSubmitLoad"></div>
-                  <span class="sr-only">Loading...</span>
-                </button>
-              </div>
-              <input type="hidden" name="anticsrf" value="true">
-            </form>
+        <div class="detected-fabrics">
+          <h5>Detected Fabrics</h5>
+          <div class="fabric-row">
+            <div><div class="fabric-name">Lyocell (TENCEL™)</div><span class="fabric-tag synthetic">Semi-Synthetic</span></div>
+            <div class="fabric-pct">64%</div>
           </div>
-
-          <div class="ml-form-successBody row-success" style="display: none">
-
-            <div class="ml-form-successContent">
-              
-                <h4>Thank you!</h4>
-                
-                  <p>You have successfully joined our subscriber list.</p>
-                
-              
-            </div>
-
+          <div class="fabric-row">
+            <div><div class="fabric-name">Cotton</div><span class="fabric-tag natural">Natural</span></div>
+            <div class="fabric-pct">34%</div>
           </div>
         </div>
       </div>
     </div>
 
-  
+    <div class="demo-arrow">
+      <div class="demo-arrow-icon">→</div>
+      <span>Better</span>
+    </div>
 
-  
-  
-  <script>
-    function ml_webform_success_32441640() {
-      var $ = ml_jQuery || jQuery;
-      $('.ml-subscribe-form-32441640 .row-success').show();
-      $('.ml-subscribe-form-32441640 .row-form').hide();
-    }
-      </script>
-  
-  
-      <script src="https://groot.mailerlite.com/js/w/webforms.min.js?v176e10baa5e7ed80d35ae235be3d5024" type="text/javascript"></script>
-        <script>
-            fetch("https://assets.mailerlite.com/jsonp/1875516/forms/169059156253213913/takel")
-        </script>
-        
-            <!-- MOBILE HERO IMAGE - Placed here under "Stay in the Know" -->
-            <div class="mobile-hero-image">
-                <img src="images/Wove-Sample.png" alt="WoveApp">
-            </div>
+    <div class="app-card">
+      <div class="app-card-header">
+        <h4>Quince 100% Washable<br>Silk Wide Leg Pants</h4>
+      </div>
+      <div class="app-card-body">
+        <div class="score-circle green">
+          <span class="score-circle-num">100</span>
+          <span class="score-circle-grade">(A+)</span>
         </div>
-    </section>
-
-    <section class="analysis-section">
-        <h2>See the Truth Behind Every Fabric</h2>
-        <p>Transparent insights for conscious shopping</p>
-        
-        <div class="analysis-grid">
-            <div class="image-placeholder">
-                <img src="images/ThreeSteps.png" alt="How it Works">
-            </div>
-            
-            <div class="feature-list">
-                <div>
-                    <h3>Instant Transparency</h3>
-                    <p>Scan any product while shopping online to instantly reveal fabric composition, sustainability scores, and chemical concerns.</p>
-                </div>
-                <div>
-                    <h3>Clear A+ to F Grading</h3>
-                    <p>Every item gets a simple grade based on natural fiber percentage, microplastic risk, PFAS concerns, and overall sustainability.</p>
-                </div>
-                <div>
-                    <h3>Better Alternatives</h3>
-                    <p>If a product doesn't meet our standards, we'll recommend an alternative that better suits your needs. No greenwashing. Just transparency.</p>
-                </div>
-            </div>
+        <div class="score-circle-label">Wove Score</div>
+        <div class="score-details">
+          <div class="score-detail-row"><span>Natural Fibers:</span><span class="val-good">100%</span></div>
+          <div class="score-detail-row"><span>Synthetic+Semi:</span><span class="val-good">0%</span></div>
+          <div class="score-detail-row"><span>Microplastic Risk:</span><span class="val-good">Low</span></div>
+          <div class="score-detail-row"><span>PFAS Concern:</span><span class="val-good">No</span></div>
         </div>
-    </section>
-
-    <section class="how-it-works">
-        <h2>How it Works</h2>
-        <p>Three easy steps to shopping consciously</p>
-        <div class="steps-container">
-            <div class="steps-left">
-                <div class="step">
-                    <div class="step-icon">
-                        <img src="images/Step1.png" alt="Download">
-                    </div>
-                    <div>
-                        <h3>Download the Extension</h3>
-                        <p>Sign up to get the link to the extension.</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-icon">
-                        <img src="images/step2.png" alt="Shop">
-                    </div>
-                    <div>
-                        <h3>Shop Anywhere</h3>
-                        <p>Browse your favorite stores like Amazon, Zara, or Reformation as usual.</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-icon">
-                        <img src="images/Step3.png" alt="Score">
-                    </div>
-                    <div>
-                        <h3>See the Score</h3>
-                        <p>Instantly view the Wove Score, fabric breakdown, and health impacts.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- REMOVED the steps-right div with screenshot -->
-        </div>
-    </section>
-
-    <section class="cta-section">
-      <style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1761043");</style>
-    <style type="text/css">
-    /* LOADER */
-    .ml-form-embedSubmitLoad {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-    }
-
-    .g-recaptcha {
-    transform: scale(1);
-    -webkit-transform: scale(1);
-    transform-origin: 0 0;
-    -webkit-transform-origin: 0 0;
-    height: ;
-    }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0,0,0,0);
-      border: 0;
-    }
-
-    .ml-form-embedSubmitLoad:after {
-      content: " ";
-      display: block;
-      width: 11px;
-      height: 11px;
-      margin: 1px;
-      border-radius: 50%;
-      border: 4px solid #fff;
-    border-color: #ffffff #ffffff #ffffff transparent;
-    animation: ml-form-embedSubmitLoad 1.2s linear infinite;
-    }
-    @keyframes ml-form-embedSubmitLoad {
-      0% {
-      transform: rotate(0deg);
-      }
-      100% {
-      transform: rotate(360deg);
-      }
-    }
-      #mlb2-32441640.ml-form-embedContainer {
-        box-sizing: border-box;
-        display: table;
-        margin: 0 auto;
-        position: static;
-        width: 100% !important;
-      }
-      #mlb2-32441640.ml-form-embedContainer h4,
-      #mlb2-32441640.ml-form-embedContainer p,
-      #mlb2-32441640.ml-form-embedContainer span,
-      #mlb2-32441640.ml-form-embedContainer button {
-        text-transform: none !important;
-        letter-spacing: normal !important;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper {
-        background-color: ;
-        
-        border-width: 0px;
-        border-color: transparent;
-        border-radius: 4px;
-        border-style: solid;
-        box-sizing: border-box;
-        display: inline-block !important;
-        margin: 0;
-        padding: 0;
-        position: relative;
-              }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper.embedPopup,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper.embedDefault { width: 400px; }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper.embedForm { max-width: 400px; width: 100%; }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-align-left { text-align: left; }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-align-center { text-align: center; }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-align-default { display: table-cell !important; vertical-align: middle !important; text-align: center !important; }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-align-right { text-align: right; }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedHeader img {
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
-        height: auto;
-        margin: 0 auto !important;
-        max-width: 100%;
-        width: undefinedpx;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody {
-        padding: 20px 20px 0 20px;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody.ml-form-embedBodyHorizontal {
-        padding-bottom: 0;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent {
-        text-align: left;
-        margin: 0 0 20px 0;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent h4,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent h4 {
-        color: #ffffff;
-        font-family: 'Poppins', sans-serif;
-        font-size: 30px;
-        font-weight: 400;
-        margin: 0 0 10px 0;
-        text-align: center;
-        word-break: break-word;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent p,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p {
-        color: #ffffff;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 20px;
-        margin: 0 0 10px 0;
-        text-align: left;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ul,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ol,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ul,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ol {
-        color: #ffffff;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-size: 14px;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ol ol,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ol ol {
-        list-style-type: lower-alpha;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ol ol ol,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ol ol ol {
-        list-style-type: lower-roman;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent p a,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p a {
-        color: #ffffff;
-        text-decoration: underline;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-block-form .ml-field-group {
-        text-align: left!important;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-block-form .ml-field-group label {
-        margin-bottom: 5px;
-        color: #333333;
-        font-size: 14px;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-weight: bold; font-style: normal; text-decoration: none;;
-        display: inline-block;
-        line-height: 20px;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent p:last-child,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p:last-child {
-        margin: 0;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody form {
-        margin: 0;
-        width: 100%;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-formContent,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow {
-        margin: 0 0 20px 0;
-        width: 100%;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow {
-        float: left;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-formContent.horozintalForm {
-        margin: 0;
-        padding: 0 0 20px 0;
-        width: 100%;
-        height: auto;
-        float: left;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow {
-        margin: 0 0 10px 0;
-        width: 100%;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow.ml-last-item {
-        margin: 0;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow.ml-formfieldHorizintal {
-        margin: 0;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input {
-        background-color: #ffffff !important;
-        color: #333333 !important;
-        border-color: #cccccc;
-        border-radius: 4px !important;
-        border-style: solid !important;
-        border-width: 1px !important;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-size: 14px !important;
-        height: auto;
-        line-height: 21px !important;
-        margin-bottom: 0;
-        margin-top: 0;
-        margin-left: 0;
-        margin-right: 0;
-        padding: 10px 10px !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-        max-width: 100% !important;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input::-webkit-input-placeholder,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input::-webkit-input-placeholder { color: #333333; }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input::-moz-placeholder,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input::-moz-placeholder { color: #333333; }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input:-ms-input-placeholder,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input:-ms-input-placeholder { color: #333333; }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input:-moz-placeholder,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input:-moz-placeholder { color: #333333; }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow textarea, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow textarea {
-        background-color: #ffffff !important;
-        color: #333333 !important;
-        border-color: #cccccc;
-        border-radius: 4px !important;
-        border-style: solid !important;
-        border-width: 1px !important;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-size: 14px !important;
-        height: auto;
-        line-height: 21px !important;
-        margin-bottom: 0;
-        margin-top: 0;
-        padding: 10px 10px !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-        max-width: 100% !important;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before {
-          border-color: #cccccc!important;
-          background-color: #ffffff!important;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input.custom-control-input[type="checkbox"]{
-        box-sizing: border-box;
-        padding: 0;
-        position: absolute;
-        z-index: -1;
-        opacity: 0;
-        margin-top: 5px;
-        margin-left: -1.5rem;
-        overflow: visible;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before {
-        border-radius: 4px!important;
-      }
-
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type=checkbox]:checked~.label-description::after, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox input[type=checkbox]:checked~.label-description::after, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-input:checked~.custom-control-label::after, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-input:checked~.custom-control-label::after, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox input[type=checkbox]:checked~.label-description::after {
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input:checked~.custom-control-label::after, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input:checked~.custom-control-label::after {
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input:checked~.custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-input:checked~.custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-input:checked~.custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-input:checked~.custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox input[type=checkbox]:checked~.label-description::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox input[type=checkbox]:checked~.label-description::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type=checkbox]:checked~.label-description::before  {
-          border-color: #ffffff!important;
-          background-color: #ffffff!important;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label::after, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label::after, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::after, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-control-label::after {
-           top: 2px;
-           box-sizing: border-box;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::after, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
-        top: 0px!important;
-        box-sizing: border-box!important;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
-        top: 0px!important;
-           box-sizing: border-box!important;
-      }
-
-       #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::after {
-            top: 0px!important;
-            box-sizing: border-box!important;
-            position: absolute;
-            left: -1.5rem;
-            display: block;
-            width: 1rem;
-            height: 1rem;
-            content: "";
-       }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before {
-        top: 0px!important;
-        box-sizing: border-box!important;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-control-label::before {
-          position: absolute;
-          top: 4px;
-          left: -1.5rem;
-          display: block;
-          width: 16px;
-          height: 16px;
-          pointer-events: none;
-          content: "";
-          background-color: #ffffff;
-          border: #adb5bd solid 1px;
-          border-radius: 50%;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-control-label::after {
-          position: absolute;
-          top: 2px!important;
-          left: -1.5rem;
-          display: block;
-          width: 1rem;
-          height: 1rem;
-          content: "";
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before {
-          position: absolute;
-          top: 4px;
-          left: -1.5rem;
-          display: block;
-          width: 16px;
-          height: 16px;
-          pointer-events: none;
-          content: "";
-          background-color: #ffffff;
-          border: #adb5bd solid 1px;
-          border-radius: 50%;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::after {
-          position: absolute;
-          top: 0px!important;
-          left: -1.5rem;
-          display: block;
-          width: 1rem;
-          height: 1rem;
-          content: "";
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
-          position: absolute;
-          top: 0px!important;
-          left: -1.5rem;
-          display: block;
-          width: 1rem;
-          height: 1rem;
-          content: "";
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-radio .custom-control-label::after {
-          background: no-repeat 50%/50% 50%;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-checkbox .custom-control-label::after, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::after, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::after, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
-          background: no-repeat 50%/50% 50%;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-control, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-control {
-        position: relative;
-        display: block;
-        min-height: 1.5rem;
-        padding-left: 1.5rem;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-input, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-input, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-input {
-          position: absolute;
-          z-index: -1;
-          opacity: 0;
-          box-sizing: border-box;
-          padding: 0;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label {
-          color: #000000;
-          font-size: 12px!important;
-          font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-          line-height: 22px;
-          margin-bottom: 0;
-          position: relative;
-          vertical-align: top;
-          font-style: normal;
-          font-weight: 700;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-select, #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-select {
-        background-color: #ffffff !important;
-        color: #333333 !important;
-        border-color: #cccccc;
-        border-radius: 4px !important;
-        border-style: solid !important;
-        border-width: 1px !important;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-size: 14px !important;
-        line-height: 20px !important;
-        margin-bottom: 0;
-        margin-top: 0;
-        padding: 10px 28px 10px 12px !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-        max-width: 100% !important;
-        height: auto;
-        display: inline-block;
-        vertical-align: middle;
-        background: url('https://assets.mlcdn.com/ml/images/default/dropdown.svg') no-repeat right .75rem center/8px 10px;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-      }
-
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow {
-        height: auto;
-        width: 100%;
-        float: left;
-      }
-      .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal { width: 70%; float: left; }
-      .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-button-horizontal { width: 30%; float: left; }
-      .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-button-horizontal.labelsOn { padding-top: 25px;  }
-      .ml-form-formContent.horozintalForm .ml-form-horizontalRow .horizontal-fields { box-sizing: border-box; float: left; padding-right: 10px;  }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input {
-        background-color: #ffffff;
-        color: #333333;
-        border-color: #cccccc;
-        border-radius: 4px;
-        border-style: solid;
-        border-width: 1px;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-size: 14px;
-        line-height: 20px;
-        margin-bottom: 0;
-        margin-top: 0;
-        padding: 10px 10px;
-        width: 100%;
-        box-sizing: border-box;
-        overflow-y: initial;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow button {
-        background-color: #ffffff !important;
-        border-color: #ffffff;
-        border-style: solid;
-        border-width: 1px;
-        border-radius: 4px;
-        box-shadow: none;
-        color: #000000 !important;
-        cursor: pointer;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-size: 14px !important;
-        font-weight: 700;
-        line-height: 20px;
-        margin: 0 !important;
-        padding: 10px !important;
-        width: 100%;
-        height: auto;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow button:hover {
-        background-color: #f0f0f0 !important;
-        border-color: #f0f0f0 !important;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type="checkbox"] {
-        box-sizing: border-box;
-        padding: 0;
-        position: absolute;
-        z-index: -1;
-        opacity: 0;
-        margin-top: 5px;
-        margin-left: -1.5rem;
-        overflow: visible;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description {
-        color: #000000;
-        display: block;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-size: 12px;
-        text-align: left;
-        margin-bottom: 0;
-        position: relative;
-        vertical-align: top;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label {
-        font-weight: normal;
-        margin: 0;
-        padding: 0;
-        position: relative;
-        display: block;
-        min-height: 24px;
-        padding-left: 24px;
-
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label a {
-        color: #000000;
-        text-decoration: underline;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label p {
-        color: #000000 !important;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
-        font-size: 12px !important;
-        font-weight: normal !important;
-        line-height: 18px !important;
-        padding: 0 !important;
-        margin: 0 5px 0 0 !important;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label p:last-child {
-        margin: 0;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit {
-        margin: 0 0 20px 0;
-        float: left;
-        width: 100%;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button {
-        background-color: #000000 !important;
-        border: none !important;
-        border-radius: 4px !important;
-        box-shadow: none !important;
-        color: #ffffff !important;
-        cursor: pointer;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
-        font-size: 14px !important;
-        font-weight: 700 !important;
-        line-height: 21px !important;
-        height: auto;
-        padding: 10px !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button.loading {
-        display: none;
-      }
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button:hover {
-        background-color: #333333 !important;
-      }
-      .ml-subscribe-close {
-        width: 30px;
-        height: 30px;
-        background: url('https://assets.mlcdn.com/ml/images/default/modal_close.png') no-repeat;
-        background-size: 30px;
-        cursor: pointer;
-        margin-top: -10px;
-        margin-right: -10px;
-        position: absolute;
-        top: 0;
-        right: 0;
-      }
-      .ml-error input, .ml-error textarea, .ml-error select {
-        border-color: red!important;
-      }
-
-      .ml-error .custom-checkbox-radio-list {
-        border: 1px solid red !important;
-        border-radius: 4px;
-        padding: 10px;
-      }
-
-      .ml-error .label-description,
-      .ml-error .label-description p,
-      .ml-error .label-description p a,
-      .ml-error label:first-child {
-        color: #ff0000 !important;
-      }
-
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow.ml-error .label-description p,
-      #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow.ml-error .label-description p:first-letter {
-        color: #ff0000 !important;
-      }
-              @media only screen and (max-width: 400px){
-
-        .ml-form-embedWrapper.embedDefault, .ml-form-embedWrapper.embedPopup { width: 100%!important; }
-        .ml-form-formContent.horozintalForm { float: left!important; }
-        .ml-form-formContent.horozintalForm .ml-form-horizontalRow { height: auto!important; width: 100%!important; float: left!important; }
-        .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal { width: 100%!important; }
-        .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal > div { padding-right: 0px!important; padding-bottom: 10px; }
-        .ml-form-formContent.horozintalForm .ml-button-horizontal { width: 100%!important; }
-        .ml-form-formContent.horozintalForm .ml-button-horizontal.labelsOn { padding-top: 0px!important; }
-
-      }
-
-      @media only screen and (max-width: 400px) {
-        #mlb2-32441640.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-formContent.horozintalForm {
-          padding: 0 0 10px 0 !important;
-        }
-        .ml-hide-horizontal { display: none !important; }
-        .ml-form-formContent.horozintalForm .ml-button-horizontal { display: none!important; }
-        .ml-mobileButton-horizontal { display: inline-block !important; margin-bottom: 20px;width:100%; }
-        .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal > div { padding-bottom: 0px !important; }
-      }
-
-    </style>
-  <style type="text/css">
-    @media only screen and (max-width: 400px) {
-       .ml-form-formContent.horozintalForm .ml-form-horizontalRow .horizontal-fields {
-        margin-bottom: 10px !important;
-        width: 100% !important;
-      }
-    }
-  </style>
-    
-    
-
-    
-    
-
-    
-    
-
-    
-
-      
-        
-        
-      
-
-      
-        
-        
-      
-
-      
-
-            
-            
-            
-            
-            
-            
-      
-
-      
-
-      
-        
-        
-         
-        
-        
-      
-
-        
-        
-        
-        
-        
-        
-      
-
-       
-
-        
-        
-        
-        
-        
-        
-        
-       
-
-
-      
-        
-        
-        
-        
-  
-
-
-
-  
-        
-        
-        
-      
-
-
-      
-    
-    
-    
-    
-    
-    
-    
-  
-
-  
-        
-        
-        
-        
-        
-      
-
-      
-        
-        
-        
-        
-        
-      
-
-      
-        
-        
-        
-        
-        
-      
-
-       
-
-        
-        
-        
-        
-       
-
-       
-        
-        
-        
-        
-      
-
-      
-        
-        
-        
-        
-        
-        
-        
-       
-
-    
-
-    
-
-
-      
-
-
-      
-
-      
-      
-
-      
-
-      
-
-
-
-
-    
-
-      
-    <div id="mlb2-32441640" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-32441640">
-      <div class="ml-form-align-center ">
-        <div class="ml-form-embedWrapper embedForm">
-
-          
-          
-
-          <div class="ml-form-embedBody ml-form-embedBodyHorizontal row-form">
-
-            <div class="ml-form-embedContent" style=" ">
-              
-                <h4>Stay in the know!</h4>
-                <p style="text-align: center;">Signup for news and special offers!</p>
-              
-            </div>
-
-            <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/1875516/forms/169059156253213913/subscribe" data-code="" method="post" target="_blank">
-              
-
-              <div class="ml-form-formContent horozintalForm">
-                <div class="ml-form-horizontalRow">
-                  <div class="ml-input-horizontal">
-                    
-                      
-                      <div style="width: 100%;" class="horizontal-fields">
-
-
-
-
-
-
-                        <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
-                          
-                          <!-- input -->
-                      <input type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="Email" autocomplete="email">
-                      <!-- /input -->
-                        </div>
-
-
-
-                      </div>
-                    
-                  </div>
-
-
-                  <div class="ml-button-horizontal primary ">
-                    
-                      <button type="submit" class="primary">Subscribe</button>
-                    
-                    <button disabled="disabled" style="display: none;" type="button" class="loading">
-                      <div class="ml-form-embedSubmitLoad"></div>
-                      <span class="sr-only">Loading...</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Privacy policy -->
-              
-              <!-- /Privacy policy -->
-
-              
-
-              
-
-              
-
-
-
-
-
-
-              
-              <input type="hidden" name="ml-submit" value="1">
-
-              
-
-              <div class="ml-mobileButton-horizontal">
-                <button type="submit" class="primary">Subscribe</button>
-                <button disabled="disabled" style="display: none;" type="button" class="loading">
-                  <div class="ml-form-embedSubmitLoad"></div>
-                  <span class="sr-only">Loading...</span>
-                </button>
-              </div>
-              <input type="hidden" name="anticsrf" value="true">
-            </form>
-          </div>
-
-          <div class="ml-form-successBody row-success" style="display: none">
-
-            <div class="ml-form-successContent">
-              
-                <h4>Thank you!</h4>
-                
-                  <p>You have successfully joined our subscriber list.</p>
-                
-              
-            </div>
-
+        <div class="detected-fabrics">
+          <h5>Detected Fabrics</h5>
+          <div class="fabric-row">
+            <div><div class="fabric-name">Mulberry Silk</div><span class="fabric-tag natural">Natural</span></div>
+            <div class="fabric-pct">100%</div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
-  
+<section class="section-cta">
+  <h2>Start building a cleaner closet</h2>
+  <p>One scan at a time. Free to download, free from influence.</p>
+  <div class="cta-buttons">
+    <a href="https://apps.apple.com/us/app/wove-score/id6755356871" class="app-store-placeholder">
+      <div class="placeholder-box store-badge cta-badge">APP STORE BADGE</div>
+    </a>
+    <a href="/wovescore" class="btn-outline-white">Learn How Scoring Works →</a>
+  </div>
+</section>
 
-  
-  
-  <script>
-    function ml_webform_success_32441640() {
-      var $ = ml_jQuery || jQuery;
-      $('.ml-subscribe-form-32441640 .row-success').show();
-      $('.ml-subscribe-form-32441640 .row-form').hide();
-    }
-      </script>
-  
-  
-      <script src="https://groot.mailerlite.com/js/w/webforms.min.js?v176e10baa5e7ed80d35ae235be3d5024" type="text/javascript"></script>
-        <script>
-            fetch("https://assets.mailerlite.com/jsonp/1875516/forms/169059156253213913/takel")
-        </script>
-    </section>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-name"><div class="logo-placeholder dark">LOGO</div></div>
+        <p>Shop consciously. Live comfortably. Wove brings transparency to the fashion industry — no ads, no brand deals, just the truth about your fabrics.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Project</h4>
+        <a href="/about">The Story</a>
+        <a href="#independence">Independence</a>
+        <a href="/wovescore">Wove Score</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/privacypolicy">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 Wove LLC. Shop consciously. Live comfortably.</div>
+  </div>
+</footer>
 
-    <footer>
-        <div class="footer-content">
-            <p>© 2025 Wove. Shop consciously. Live comfortably.</p>
-            <div class="footer-links">
-                <a href="/about">About</a>
-                <a href="/wovescore">How Scoring Works</a>
-                <a href="/privacypolicy">Privacy Policy</a>
-                <a href="/contact">Contact</a>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile menu toggle
-        function toggleMenu(hamburger) {
-            const nav = document.getElementById('mainNav');
-            nav.classList.toggle('active');
-            hamburger.classList.toggle('active');
-        }
-
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const nav = document.getElementById('mainNav');
-            const hamburger = document.querySelector('.hamburger');
-            if (!nav.contains(event.target) && !hamburger.contains(event.target)) {
-                nav.classList.remove('active');
-                hamburger.classList.remove('active');
-            }
-        });
-
-        // Close menu when clicking a link
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', function() {
-                document.getElementById('mainNav').classList.remove('active');
-                document.querySelector('.hamburger').classList.remove('active');
-            });
-        });
-
-        // Email form handling with Formspree
-        function handleFormSubmit(formId, successId, errorId) {
-            const form = document.getElementById(formId);
-            const success = document.getElementById(successId);
-            const error = document.getElementById(errorId);
-            
-            form.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                
-                const formData = new FormData(form);
-                
-                try {
-                    const response = await fetch(form.action, {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'Accept': 'application/json'
-                        }
-                    });
-                    
-                    if (response.ok) {
-                        success.style.display = 'block';
-                        error.style.display = 'none';
-                        form.reset();
-                        
-                        setTimeout(() => {
-                            success.style.display = 'none';
-                        }, 5000);
-                    } else {
-                        error.style.display = 'block';
-                        success.style.display = 'none';
-                    }
-                } catch (err) {
-                    error.style.display = 'block';
-                    success.style.display = 'none';
-                }
-            });
-        }
-
-        handleFormSubmit('homeEmailForm', 'homeSuccess', 'homeError');
-        handleFormSubmit('ctaEmailForm', 'ctaSuccess', 'ctaError');
-    </script>
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); });
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
 </body>
 </html>
